@@ -1,0 +1,8 @@
+.DS_Store
+
+/builds/*
+CrazyShooter/Assets/DOTween/Editor/DOTweenEditor.dll.mdb.meta
+CrazyShooter/Assets/DOTween/DOTween.dll.mdb.meta
+CrazyShooter/Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta
+CrazyShooter/Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
+CrazyShooter/Assets/Plugins/Zenject/Source/Zenject.csproj.meta
