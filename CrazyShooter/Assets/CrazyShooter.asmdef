@@ -1,0 +1,20 @@
+{
+    "name": "CrazyShooter",
+    "rootNamespace": "",
+    "references": [
+        "Zenject",
+        "Unity.TextMeshPro",
+        "com.smc.profile",
+        "com.smc.tools",
+        "com.smc.windows"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

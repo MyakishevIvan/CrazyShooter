@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "com.smc.profile": "https://smc.unity:SmcUnity1@gitlab.com/smc-shared/profile.git?path=Packages/com.smc.profile#1.0.0",
+    "com.smc.tools": "https://smc.unity:SmcUnity1@gitlab.com/smc-shared/tools.git?path=Packages/com.smc.tools#0.0.20",
+    "com.smc.windows": "https://smc.unity:SmcUnity1@gitlab.com/smc-shared/windows.git?path=Packages/com.smc.windows#0.1.9",
+    "com.unity.nuget.newtonsoft-json": "2.0.2",
     "com.unity.2d.animation": "5.1.0",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.2.0",
