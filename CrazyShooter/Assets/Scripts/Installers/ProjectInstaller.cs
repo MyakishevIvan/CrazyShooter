@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using CrazyShooter.Signals;
+using CrazyShooter.System;
 using SMC.Profile;
 using SMC.Tools.Events;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class ProjectInstaller : MonoInstaller
 
     private void BindSystem()
     {
-        
+        Container.BindInterfacesAndSelfTo<SceneTransitionSystem>().AsSingle().NonLazy();
+
     }
 
     private void CreateProfileManagers()
