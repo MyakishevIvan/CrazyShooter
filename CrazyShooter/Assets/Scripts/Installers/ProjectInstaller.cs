@@ -13,6 +13,9 @@ public class ProjectInstaller : MonoInstaller
     {
         Application.targetFrameRate = 60;
         Application.runInBackground = false;
+        DeclareSignals();
+        BindSystem();
+        CreateProfileManagers();
     }
 
     private void DeclareSignals()
@@ -64,7 +67,6 @@ public class ProjectInstaller : MonoInstaller
 
     private static void InitializeProfileController(ProfileController profileController)
     {
-        // profileController.Init();
 
         UnityEventsObserver.Instance.OnApplicationPauseEvent += pause =>
         {
