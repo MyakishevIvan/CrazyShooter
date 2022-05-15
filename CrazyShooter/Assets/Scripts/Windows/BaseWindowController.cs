@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CrazyShooter.Windows
 {
-    public class BaseWindow : WindowController
+    public class BaseWindowController : WindowController
     {
         [SerializeField] protected RectTransform safeArea;
         [SerializeField, NotRequiredField] protected CustomButton closeButton;

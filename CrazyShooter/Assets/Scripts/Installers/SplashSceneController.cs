@@ -19,6 +19,6 @@ public class SplashSceneController : MonoBehaviour
 
   private void Start()
   {
-    _sceneTransitionSystem.GoToScene(Scene.Main, false, false);
+    _sceneTransitionSystem.GoToScene(Scene.Menu, false, false);
   }
 }
