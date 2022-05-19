@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using CrazyShooter.Signals;
 using SMC.Tools.Coroutines;
 using SMC.Windows;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
-using Scene = Enums.Scene;
+using CrayzShooter.Enum;
 
 namespace CrazyShooter.System
 {
@@ -57,7 +55,7 @@ namespace CrazyShooter.System
             _windowsManager.Close<SceneTransitionWindow>();
         }
 
-        public void GoToScene(Scene scene, bool closeAllWindow = true, bool withTransitionScene = true,
+        public void GoToScene(SceneType scene, bool closeAllWindow = true, bool withTransitionScene = true,
             bool closeTransitionScene = true, bool currentUnload = true)
         {
             _currentLoadAction = () =>
@@ -75,7 +73,7 @@ namespace CrazyShooter.System
                 InvokeLoadAction();
         }
 
-        private IEnumerator LoadSceneAsync(Scene scene, LoadSceneMode mode, bool closeTransitionScene)
+        private IEnumerator LoadSceneAsync(SceneType scene, LoadSceneMode mode, bool closeTransitionScene)
         {
             var load = SceneManager.LoadSceneAsync((int)scene, mode);
             load.allowSceneActivation = false;

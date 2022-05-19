@@ -12,162 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: 'CraztShooter
-
-    System.IO.Path.GetFileName (System.String path)
-    (at <695d1cc93cca45069c528c15c9fdd749>:0)
-
-    UnityEditor.ProjectBrowser.RefreshSearchText
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.FolderTreeSelectionChanged
-    (System.Boolean folderWasSelected) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.SetFolderSelection
-    (System.Int32[] selectedInstanceIDs, System.Boolean revealSelectionAndFrameLastSelected,
-    System.Boolean folderWasSelected) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.SetFolderSelection
-    (System.Int32[] selectedInstanceIDs, System.Boolean revealSelectionAndFrameLastSelected)
-    (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.OpenSelectedFolders
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.OpenListAreaSelection
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.ListAreaItemSelectedCallback
-    (System.Boolean doubleClicked) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea.SetSelection
-    (System.Int32[] selectedInstanceIDs, System.Boolean doubleClicked) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea+LocalGroup.HandleMouseWithDragging
-    (UnityEditorInternal.InternalEditorUtility+AssetReference& assetReference, System.Int32
-    controlID, UnityEngine.Rect rect) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea+LocalGroup.DrawItem
-    (UnityEngine.Rect position, UnityEditor.FilteredHierarchy+FilterResult filterItem,
-    UnityEditor.BuiltinResource builtinResource, System.Boolean isFolderBrowsing)
-    (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea+LocalGroup.DrawInternal
-    (System.Int32 beginIndex, System.Int32 endIndex, System.Single yOffset) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea+Group.Draw
-    (System.Single yOffset, UnityEngine.Vector2 scrollPos, System.Int32& rowsInUse)
-    (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea.HandleListArea
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ObjectListArea.OnGUI
-    (UnityEngine.Rect position, System.Int32 keyboardControlID) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.ProjectBrowser.OnGUI
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.HostView.InvokeOnGUI
-    (UnityEngine.Rect onGUIPosition, UnityEngine.Rect viewRect) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.DockArea.DrawView
-    (UnityEngine.Rect viewRect, UnityEngine.Rect dockAreaRect) (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEditor.DockArea.OldOnGUI
-    () (at <68089899e4c84456bfc1de3436accf4a>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.DoOnGUI
-    (UnityEngine.Event evt, UnityEngine.Matrix4x4 parentTransform, UnityEngine.Rect
-    clippingRect, System.Boolean isComputingLayout, UnityEngine.Rect layoutSize,
-    System.Action onGUIHandler, System.Boolean canAffectFocus) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEvent
-    (UnityEngine.Event e, UnityEngine.Matrix4x4 worldTransform, UnityEngine.Rect
-    clippingRect, System.Action onGUIHandler, System.Boolean canAffectFocus) (at
-    <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEvent
-    (UnityEngine.Event e, System.Action onGUIHandler, System.Boolean canAffectFocus)
-    (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEvent
-    (UnityEngine.Event e, System.Boolean canAffectFocus) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.SendEventToIMGUIRaw
-    (UnityEngine.UIElements.EventBase evt, System.Boolean canAffectFocus, System.Boolean
-    verifyBounds) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.SendEventToIMGUI
-    (UnityEngine.UIElements.EventBase evt, System.Boolean canAffectFocus, System.Boolean
-    verifyBounds) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.IMGUIContainer.HandleEvent
-    (UnityEngine.UIElements.EventBase evt) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatchUtilities.PropagateEvent
-    (UnityEngine.UIElements.EventBase evt) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.MouseEventDispatchingStrategy.SendEventToRegularTarget
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.BaseVisualElementPanel
-    panel) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.MouseEventDispatchingStrategy.SendEventToTarget
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.BaseVisualElementPanel
-    panel) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.MouseEventDispatchingStrategy.DispatchEvent
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.IPanel iPanel)
-    (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.ApplyDispatchingStrategies
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.IPanel panel, System.Boolean
-    imguiEventIsInitiallyUsed) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.ProcessEvent
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.IPanel panel) (at
-    <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.ProcessEventQueue
-    () (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.OpenGate
-    () (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcherGate.Dispose
-    () (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.ProcessEvent
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.IPanel panel) (at
-    <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.EventDispatcher.Dispatch
-    (UnityEngine.UIElements.EventBase evt, UnityEngine.UIElements.IPanel panel, UnityEngine.UIElements.DispatchMode
-    dispatchMode) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.BaseVisualElementPanel.SendEvent
-    (UnityEngine.UIElements.EventBase e, UnityEngine.UIElements.DispatchMode dispatchMode)
-    (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.UIElementsUtility.DoDispatch
-    (UnityEngine.UIElements.BaseVisualElementPanel panel) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.UIElementsUtility.UnityEngine.UIElements.IUIElementsUtility.ProcessEvent
-    (System.Int32 instanceID, System.IntPtr nativeEventPtr, System.Boolean& eventHandled)
-    (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.UIEventRegistration.ProcessEvent
-    (System.Int32 instanceID, System.IntPtr nativeEventPtr) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.UIElements.UIEventRegistration+<>c.<.cctor>b__1_2
-    (System.Int32 i, System.IntPtr ptr) (at <9c79dfaa81ca4dafa70d4219450af5e1>:0)
-
-    UnityEngine.GUIUtility.ProcessEvent
-    (System.Int32 instanceID, System.IntPtr nativeEventPtr, System.Boolean& result)
-    (at <5d9cca3e225d482d8a3c2bc9152ed3be>:0)
-
-'
+  companyName: CrazyShooter
+  productName: CrazyShooter
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -288,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -307,7 +153,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.CraztShooterSystem.IO.Path.GetFileNameSystem.Stringpathat695d1cc93cca45069c528c15c9fdd7490UnityEditor.ProjectBrowser.RefreshSearchTextat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.FolderTreeSelectionChangedSystem.BooleanfolderWasSelectedat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.SetFolderSelectionSystem.Int32selectedInstanceIDsSystem.BooleanrevealSelectionAndFrameLastSelectedSystem.BooleanfolderWasSelectedat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.SetFolderSelectionSystem.Int32selectedInstanceIDsSystem.BooleanrevealSelectionAndFrameLastSelectedat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.OpenSelectedFoldersat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.OpenListAreaSelectionat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.ListAreaItemSelectedCallbackSystem.BooleandoubleClickedat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListArea.SetSelectionSystem.Int32selectedInstanceIDsSystem.BooleandoubleClickedat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListAreaLocalGroup.HandleMouseWithDraggingUnityEditorInternal.InternalEditorUtilityAssetReferenceassetReferenceSystem.Int32controlIDUnityEngine.Rectrectat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListAreaLocalGroup.DrawItemUnityEngine.RectpositionUnityEditor.FilteredHierarchyFilterResultfilterItemUnityEditor.BuiltinResourcebuiltinResourceSystem.BooleanisFolderBrowsingat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListAreaLocalGroup.DrawInternalSystem.Int32beginIndexSystem.Int32endIndexSystem.SingleyOffsetat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListAreaGroup.DrawSystem.SingleyOffsetUnityEngine.Vector2scrollPosSystem.Int32rowsInUseat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListArea.HandleListAreaat68089899e4c84456bfc1de3436accf4a0UnityEditor.ObjectListArea.OnGUIUnityEngine.RectpositionSystem.Int32keyboardControlIDat68089899e4c84456bfc1de3436accf4a0UnityEditor.ProjectBrowser.OnGUIat68089899e4c84456bfc1de3436accf4a0UnityEditor.HostView.InvokeOnGUIUnityEngine.RectonGUIPositionUnityEngine.RectviewRectat68089899e4c84456bfc1de3436accf4a0UnityEditor.DockArea.DrawViewUnityEngine.RectviewRectUnityEngine.RectdockAreaRectat68089899e4c84456bfc1de3436accf4a0UnityEditor.DockArea.OldOnGUIat68089899e4c84456bfc1de3436accf4a0UnityEngine.UIElements.IMGUIContainer.DoOnGUIUnityEngine.EventevtUnityEngine.Matrix4x4parentTransformUnityEngine.RectclippingRectSystem.BooleanisComputingLayoutUnityEngine.RectlayoutSizeSystem.ActiononGUIHandlerSystem.BooleancanAffectFocusat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEventUnityEngine.EventeUnityEngine.Matrix4x4worldTransformUnityEngine.RectclippingRectSystem.ActiononGUIHandlerSystem.BooleancanAffectFocusat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEventUnityEngine.EventeSystem.ActiononGUIHandlerSystem.BooleancanAffectFocusat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.HandleIMGUIEventUnityEngine.EventeSystem.BooleancanAffectFocusat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.SendEventToIMGUIRawUnityEngine.UIElements.EventBaseevtSystem.BooleancanAffectFocusSystem.BooleanverifyBoundsat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.SendEventToIMGUIUnityEngine.UIElements.EventBaseevtSystem.BooleancanAffectFocusSystem.BooleanverifyBoundsat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.IMGUIContainer.HandleEventUnityEngine.UIElements.EventBaseevtat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatchUtilities.PropagateEventUnityEngine.UIElements.EventBaseevtat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.MouseEventDispatchingStrategy.SendEventToRegularTargetUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.BaseVisualElementPanelpanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.MouseEventDispatchingStrategy.SendEventToTargetUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.BaseVisualElementPanelpanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.MouseEventDispatchingStrategy.DispatchEventUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.IPaneliPanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.ApplyDispatchingStrategiesUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.IPanelpanelSystem.BooleanimguiEventIsInitiallyUsedat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.ProcessEventUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.IPanelpanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.ProcessEventQueueat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.OpenGateat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcherGate.Disposeat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.ProcessEventUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.IPanelpanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.EventDispatcher.DispatchUnityEngine.UIElements.EventBaseevtUnityEngine.UIElements.IPanelpanelUnityEngine.UIElements.DispatchModedispatchModeat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.BaseVisualElementPanel.SendEventUnityEngine.UIElements.EventBaseeUnityEngine.UIElements.DispatchModedispatchModeat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.UIElementsUtility.DoDispatchUnityEngine.UIElements.BaseVisualElementPanelpanelat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.UIElementsUtility.UnityEngine.UIElements.IUIElementsUtility.ProcessEventSystem.Int32instanceIDSystem.IntPtrnativeEventPtrSystem.BooleaneventHandledat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.UIEventRegistration.ProcessEventSystem.Int32instanceIDSystem.IntPtrnativeEventPtrat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.UIElements.UIEventRegistrationc..cctorb12System.Int32iSystem.IntPtrptrat9c79dfaa81ca4dafa70d4219450af5e10UnityEngine.GUIUtility.ProcessEventSystem.Int32instanceIDSystem.IntPtrnativeEventPtrSystem.Booleanresultat5d9cca3e225d482d8a3c2bc9152ed3be0
+    Standalone: com.CrazyShooter.CrazyShooter
   buildNumber:
     Standalone: 0
     iPhone: 0

@@ -1,11 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.UI;
 using SMC.Windows;
 using UnityEngine;
 
-public class MenuWindow : Window<WindowSetup.Empty>
+namespace CrayzShooter.Windows
 {
-    public override void Setup(WindowSetup.Empty setup)
+    public class MenuWindow : Window<MenuWondowSetup>
     {
+        [SerializeField] private CustomButton playButton;
+        public override void Setup(MenuWondowSetup setup)
+        {
+            playButton.onClick.RemoveAllListeners();
+            playButton.onClick.AddListener(() => setup.onPlay());
+        }
     }
+
+    public class MenuWondowSetup : WindowSetup
+    {
+        public Action onPlay;
+    }
+
 }

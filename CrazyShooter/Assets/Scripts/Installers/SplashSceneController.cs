@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.System;
-using Enums;
+using CrayzShooter.Enum;
 using SMC.Windows;
 using UnityEngine;
 using Zenject;
@@ -19,6 +19,6 @@ public class SplashSceneController : MonoBehaviour
 
   private void Start()
   {
-    _sceneTransitionSystem.GoToScene(Scene.Menu, false, false);
+    _sceneTransitionSystem.GoToScene(SceneType.Menu, true, false);
   }
 }

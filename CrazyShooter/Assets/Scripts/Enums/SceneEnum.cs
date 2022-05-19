@@ -1,9 +1,9 @@
-namespace Enums
+namespace CrayzShooter.Enum
 {
-    public  enum Scene
+    public enum SceneType
     {
         Splash = 0,
         Menu = 1,
-        Main = 2,
+        FighScene = 2,
     }
 }
