@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using CrayzShooter.Configs;
 using CrazyShooter.Signals;
 using CrazyShooter.System;
 using SMC.Profile;
@@ -6,9 +6,11 @@ using SMC.Tools.Events;
 using SMC.Windows;
 using UnityEngine;
 using  Zenject;
+
 public class ProjectInstaller : MonoInstaller
 {
     [SerializeField] private WindowsManager _windowsManager;
+    [SerializeField] private BalanceStorage _balanceStorage;
     public override void InstallBindings()
     {
         Application.targetFrameRate = 60;
@@ -29,6 +31,8 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<WindowsManager>().FromComponentInNewPrefab(_windowsManager).AsSingle().NonLazy();
         WindowsManager.CustomWindowInstantiator = CustomWindowInstantiation;
         Container.BindInterfacesAndSelfTo<SceneTransitionSystem>().AsSingle().NonLazy();
+
+        Container.Bind<BalanceStorage>().FromInstance(_balanceStorage).AsSingle();
 
     }
     
