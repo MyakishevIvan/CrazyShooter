@@ -48,7 +48,8 @@ namespace CrayzShooter.Weapons
             {
                 if (_canShoot)
                 {
-                    var currentBullet = Instantiate(bullet, bulletStartPos.position, bulletStartPos.rotation);
+                    var newPos = new Vector3(bulletStartPos.position.x, bulletStartPos.position.y, 0);
+                    var currentBullet = Instantiate(bullet, newPos, bulletStartPos.rotation);
                     currentBullet.Init(BulletSpeed, Damage, _shootingVector);
                     yield return new WaitForSeconds(ReloadTime);
 

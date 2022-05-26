@@ -16,12 +16,26 @@ namespace CrayzShooter.Weapons
             Speed = speed;
             Damage = damage;
             Target = target;
+            Invoke("DestoyBullet", 5);
         }
 
         private void Update()
         {
 
             transform.Translate(Vector2.right * Speed * Time.deltaTime);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void DestoyBullet()
+        {
+            Destroy(gameObject);
         }
     }
 }

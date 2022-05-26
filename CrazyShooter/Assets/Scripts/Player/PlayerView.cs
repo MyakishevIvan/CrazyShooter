@@ -24,6 +24,7 @@ namespace CrayzShooter.Core
         {
             var gun = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
             gun.Init();
+            gun.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
         public void PlayAnimation(bool isRun)
         {
