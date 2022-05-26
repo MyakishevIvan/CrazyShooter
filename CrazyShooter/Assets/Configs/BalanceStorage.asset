@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13ad8485d42b9e4c83403bc8853fbc3, type: 3}
   m_Name: BalanceStorage
   m_EditorClassIdentifier: 
-  playerConfig: {fileID: 0}
+  playerConfig: {fileID: 11400000, guid: 2d1cff1f3caabad4aa49aab1cdc753ae, type: 2}

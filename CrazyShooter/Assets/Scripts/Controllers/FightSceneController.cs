@@ -14,7 +14,7 @@ namespace CrayzShooter.FightScene
 
         private void Awake()
         {
-            var player = _diContainer.InstantiatePrefabForComponent<Player>(_playerConfig.Player);
+            var player = _diContainer.InstantiatePrefabForComponent<PlayerView>(_playerConfig.Player);
             var playerController = _diContainer.InstantiatePrefabForComponent<PlayerController>(_playerConfig.PlayerController, player.transform);
             playerController.Speed = _playerConfig.PlayerSpeed;
         }
