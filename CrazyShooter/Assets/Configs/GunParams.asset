@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13ad8485d42b9e4c83403bc8853fbc3, type: 3}
-  m_Name: BalanceStorage
+  m_Script: {fileID: 11500000, guid: 28373376b66290c448b04a302a0593e7, type: 3}
+  m_Name: GunParams
   m_EditorClassIdentifier: 
-  playerConfig: {fileID: 11400000, guid: 2d1cff1f3caabad4aa49aab1cdc753ae, type: 2}
-  waponsConfig: {fileID: 11400000, guid: 40b795e193a6ef04695f692d5b81b966, type: 2}
+  damage: 3
+  bulletspeed: 50
+  reloadTime: 0.3

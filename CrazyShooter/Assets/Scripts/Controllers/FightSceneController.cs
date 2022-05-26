@@ -16,8 +16,9 @@ namespace CrayzShooter.FightScene
         {
             var player = _diContainer.InstantiatePrefabForComponent<PlayerView>(_playerConfig.Player);
             var playerController = _diContainer.InstantiatePrefabForComponent<PlayerController>(_playerConfig.PlayerController, player.transform);
+            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(Enum.WeaponType.Gun);
+            player.InitWeapon(weapon);
             playerController.Speed = _playerConfig.PlayerSpeed;
         }
     }
-
 }

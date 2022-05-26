@@ -8,7 +8,8 @@ namespace CrayzShooter.Configs
     public class BalanceStorage : ScriptableObject
     {
         [SerializeField] private PlayerConfig playerConfig;
-
+        [SerializeField] private WeaponsConfig waponsConfig;
         public PlayerConfig PlayerConfig => playerConfig;
+        public WeaponsConfig WeaponsConfig => waponsConfig;
     }
 }
