@@ -11,6 +11,6 @@ namespace CrayzShooter.Weapons
         public float Damage { get; set; }
         public WeaponType WeaponType => weaponType;
 
-        public abstract void Init();
+        public abstract void Init(Joystick weaponJoystick = null);
     }
 }

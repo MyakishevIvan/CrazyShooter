@@ -27,7 +27,7 @@ namespace CrayzShooter.Weapons
            transform.rotation = Quaternion.Euler(0f,0f,0f);
         }
 
-        public override void Init()
+        public override void Init(Joystick weaponJoystick)
         {
             _angle = SwordParams.Angle;
             _speed = SwordParams.Speed;
@@ -36,7 +36,12 @@ namespace CrayzShooter.Weapons
 
         private void Update()
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButton(0) && !_attacking)
+#else
+                if(Input.touchCount> 0)
+            
+#endif
             {
                 _startAngle = 0;
                 _attacking = true;
@@ -51,7 +56,6 @@ namespace CrayzShooter.Weapons
                _balance.PlayerConfig.EnemyLayer);
             for (int i = 0; i < enemies.Length; i++)
             {
-                Debug.LogError("Hit");
             }
         }
 

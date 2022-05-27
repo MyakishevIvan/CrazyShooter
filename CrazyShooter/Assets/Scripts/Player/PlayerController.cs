@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrayzShooter.Enum;
 using UnityEngine;
 
 namespace CrayzShooter.Core
@@ -14,10 +15,16 @@ namespace CrayzShooter.Core
         private bool _isRightPlayerSide = true;
 
         public float Speed { get; set; }
+        public Joystick ShootJoystick => shootJoystick;
 
         private void Awake()
         {
             _playerView = GetComponentInParent<PlayerView>();
+        }
+
+        public void UpdageControllerView(WeaponType weaponType)
+        {
+            shootJoystick.gameObject.SetActive(weaponType == WeaponType.Gun);
         }
         private void Update()
         {
@@ -51,7 +58,7 @@ namespace CrayzShooter.Core
 
         void FixedUpdate()
         {
-            _playerView.Rigidbody2D.MovePosition(_playerView.Rigidbody2D.position + _moveVector * Speed * Time.fixedDeltaTime);
+            _playerView.Rigidbody2D.MovePosition(_playerView.Rigidbody2D.position + _moveVector * (Speed * Time.fixedDeltaTime));
         }
     }
 }

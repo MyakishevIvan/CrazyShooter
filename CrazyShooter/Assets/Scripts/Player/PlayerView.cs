@@ -20,12 +20,13 @@ namespace CrayzShooter.Core
         [Inject] DiContainer _diContainer;
         [Inject] private SignalBus _signal;
 
+        public PlayerController _playerController { get; set; }
         public Rigidbody2D Rigidbody2D => rigidbody2D;
 
-        public void InitWeapon(Weapon weapon)
+        public void InitWeapon(Weapon weapon, Joystick weaponJoystick)
         {
             var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-            currentWeapon.Init();
+            currentWeapon.Init(weaponJoystick);
             currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
         public void PlayAnimation(bool isRun)
