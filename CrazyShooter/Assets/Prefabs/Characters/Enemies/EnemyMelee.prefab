@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1915833303052067011}
   - component: {fileID: 852674950291800074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954122593948936187}
   - component: {fileID: 1994125803125678353}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LegAndHandLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,9 +177,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2918474378668324008}
   - component: {fileID: 3645943479242457339}
-  - component: {fileID: 6038755951596874158}
-  - component: {fileID: 7001566490986298022}
-  m_Layer: 0
+  - component: {fileID: 3432584090738774638}
+  m_Layer: 7
   m_Name: EnemyMelee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,8 +221,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &6038755951596874158
-CapsuleCollider2D:
+--- !u!60 &3432584090738774638
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,25 +234,29 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04}
-  m_Size: {x: 1.9, y: 1.61}
-  m_Direction: 0
---- !u!58 &7001566490986298022
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2463559530763449269}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.1155515}
-  serializedVersion: 2
-  m_Radius: 2.782947
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.3502994, y: 2.018077}
+      - {x: 2.1452193, y: 4.1126485}
+      - {x: 1.4158901, y: 5.1665444}
+      - {x: -0.042638175, y: 5.51964}
+      - {x: -1.5629086, y: 4.9998684}
+      - {x: -2.188211, y: 3.8756342}
+      - {x: -2.1079626, y: 1.8380969}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
 --- !u!1 &2952680855058801779
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6732409965011098758}
   - component: {fileID: 465887781228057910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2397111470603000510}
   - component: {fileID: 8582384222689344400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LegAndHandRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4846868178271717866}
   - component: {fileID: 6451891571108363867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Horns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6742407033935530840}
   - component: {fileID: 3691032743898831238}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}

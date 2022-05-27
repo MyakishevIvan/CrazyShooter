@@ -47,7 +47,7 @@ namespace Zenject.SpaceFighter
             }
             else
             {
-                var player = other.GetComponent<PlayerFacade>();
+                var player = other.GetComponent<PlayerFacade>();        
 
                 if (player != null && _type == BulletTypes.FromEnemy)
                 {

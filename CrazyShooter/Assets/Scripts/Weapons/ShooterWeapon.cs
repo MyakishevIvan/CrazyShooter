@@ -10,13 +10,14 @@ namespace CrayzShooter.Weapons
     {
 
         [SerializeField] private Transform bulletStartPos;
-        [SerializeField] private float offset;
         [SerializeField] private Bullet bullet;
         [Inject] private BalanceStorage _balance;
+        [Inject] private DiContainer _diContainer;
         private Vector3 _shootingVector;
         private bool _canShoot;
 
         private GunParams GunParams => _balance.WeaponsConfig.GunParams;
+        private float offset => transform.lossyScale.x >= 0 ? 0 : 180;
         private float BulletSpeed { get; set; }
         private float ReloadTime { get; set; }
 
@@ -34,7 +35,7 @@ namespace CrayzShooter.Weapons
         {
             _shootingVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             var angel = Mathf.Atan2(_shootingVector.y, _shootingVector.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angel + offset);
+            transform.rotation = Quaternion.Euler(0f, 0f,   angel + offset);
 
             if (Input.GetMouseButton(0))
                 _canShoot = true;
@@ -49,7 +50,7 @@ namespace CrayzShooter.Weapons
                 if (_canShoot)
                 {
                     var newPos = new Vector3(bulletStartPos.position.x, bulletStartPos.position.y, 0);
-                    var currentBullet = Instantiate(bullet, newPos, bulletStartPos.rotation);
+                    var currentBullet = _diContainer.InstantiatePrefabForComponent<Bullet>(bullet, newPos, bulletStartPos.rotation, transform);
                     currentBullet.Init(BulletSpeed, Damage, _shootingVector);
                     yield return new WaitForSeconds(ReloadTime);
 

@@ -15,3 +15,9 @@ MonoBehaviour:
   playerController: {fileID: 7548150803131422207, guid: 4bfd1a5459c1ab645aa5b09f6f7ac097, type: 3}
   player: {fileID: 4065806040829728622, guid: faf9e61749dea6e448287310159eae69, type: 3}
   playerSpeed: 8
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64

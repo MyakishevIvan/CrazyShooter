@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Signals;
 using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
@@ -17,14 +18,15 @@ namespace CrayzShooter.Core
         [SerializeField] private Weapon weapon;
         [SerializeField] private GameObject Head;
         [Inject] DiContainer _diContainer;
+        [Inject] private SignalBus _signal;
 
         public Rigidbody2D Rigidbody2D => rigidbody2D;
 
         public void InitWeapon(Weapon weapon)
         {
-            var gun = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-            gun.Init();
-            gun.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+            var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
+            currentWeapon.Init();
+            currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
         public void PlayAnimation(bool isRun)
         {
@@ -33,7 +35,7 @@ namespace CrayzShooter.Core
 
         public void Flip()
         {
-            Head.transform.localScale = new Vector3(-1 * Head.transform.localScale.x, Head.transform.localScale.y, Head.transform.localScale.z);
+            transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 }
