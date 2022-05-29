@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrayzShooter.Configs;
 using CrayzShooter.Enum;
 using UnityEngine;
+using Zenject;
 
 namespace CrayzShooter.Core
 {
@@ -9,6 +11,8 @@ namespace CrayzShooter.Core
     {
         [SerializeField] private Joystick moveJoystick;
         [SerializeField] private Joystick shootJoystick;
+        [Inject] private BalanceStorage _balance;
+        private PlayerConfig _playerConfig => _balance.PlayerConfig;
         private PlayerView _playerView;
         private Vector2 _moveVector;
         private bool _isRun;
@@ -20,6 +24,7 @@ namespace CrayzShooter.Core
         private void Awake()
         {
             _playerView = GetComponentInParent<PlayerView>();
+            Speed = _playerConfig.PlayerSpeed;
         }
 
         public void UpdageControllerView(WeaponType weaponType)

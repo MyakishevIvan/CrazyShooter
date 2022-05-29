@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CrayzShooter.Configs
 {
-    [CreateAssetMenu(fileName = "PlayerConfig", menuName = "configs/PlayerConfig")]
+    [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig")]
     public class PlayerConfig : ScriptableObject
     {
         [SerializeField] private PlayerController playerController;

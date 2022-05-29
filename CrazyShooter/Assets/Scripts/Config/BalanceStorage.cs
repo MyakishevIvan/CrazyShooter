@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Configs;
 using UnityEngine;
 
 namespace CrayzShooter.Configs
@@ -8,8 +9,10 @@ namespace CrayzShooter.Configs
     public class BalanceStorage : ScriptableObject
     {
         [SerializeField] private PlayerConfig playerConfig;
-        [SerializeField] private WeaponsConfig waponsConfig;
+        [SerializeField] private WeaponsConfig weaponsConfig;
+        [SerializeField] private RoomsConfig roomsConfig;
         public PlayerConfig PlayerConfig => playerConfig;
-        public WeaponsConfig WeaponsConfig => waponsConfig;
+        public WeaponsConfig WeaponsConfig => weaponsConfig;
+        public RoomsConfig RoomsConfig => roomsConfig;
     }
 }
