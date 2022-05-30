@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using CrayzShooter.Configs;
-using CrayzShooter.Enum;
+using CrazyShooter.Configs;
+using CrazyShooter.Enum;
 using UnityEngine;
 using Zenject;
 
-namespace CrayzShooter.Core
+namespace CrazyShooter.Core
 {
     public class PlayerController : MonoBehaviour
     {

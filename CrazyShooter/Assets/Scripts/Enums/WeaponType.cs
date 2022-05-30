@@ -1,4 +1,4 @@
-namespace CrayzShooter.Enum
+namespace CrazyShooter.Enum
 {
     public enum WeaponType
     {

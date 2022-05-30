@@ -1,4 +1,4 @@
-using CrayzShooter.Configs;
+using CrazyShooter.Configs;
 using CrazyShooter.Signals;
 using CrazyShooter.System;
 using SMC.Profile;

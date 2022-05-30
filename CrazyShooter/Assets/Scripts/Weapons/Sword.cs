@@ -1,9 +1,9 @@
-using CrayzShooter.Enum;
+using CrazyShooter.Enum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CrayzShooter.Weapons
+namespace CrazyShooter.Weapons
 {
     public class Sword : MeleeWeapon
     {

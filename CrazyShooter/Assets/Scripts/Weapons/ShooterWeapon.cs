@@ -1,13 +1,13 @@
-using CrayzShooter.Configs;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using CrazyShooter.Configs;
 using UnityEngine;
 using Zenject;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-namespace CrayzShooter.Weapons
+namespace CrazyShooter.Weapons
 {
     public class ShooterWeapon : Weapon
     {

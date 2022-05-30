@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.System;
-using CrayzShooter.Enum;
+using CrazyShooter.Enum;
 using SMC.Windows;
 using UnityEngine;
 using Zenject;

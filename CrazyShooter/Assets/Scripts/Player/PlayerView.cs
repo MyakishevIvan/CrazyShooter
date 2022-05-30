@@ -1,14 +1,14 @@
-using CrayzShooter.Weapons;
 using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Signals;
+using CrazyShooter.Weapons;
 using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 
-namespace CrayzShooter.Core
+namespace CrazyShooter.Core
 {
     public class PlayerView : MonoBehaviour
     {

@@ -1,7 +1,7 @@
-using CrayzShooter.Core;
+using CrazyShooter.Core;
 using UnityEngine;
 
-namespace CrayzShooter.Configs
+namespace CrazyShooter.Configs
 {
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig")]
     public class PlayerConfig : ScriptableObject

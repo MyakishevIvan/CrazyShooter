@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using CrayzShooter.Configs;
-using CrayzShooter.Core;
-using CrayzShooter.Enum;
+using CrazyShooter.Core;
+using CrazyShooter.Enum;
 using CrazyShooter.Configs;
 using CrazyShooter.Enums;
 using CrazyShooter.Rooms;
@@ -15,6 +14,8 @@ namespace CrazyShooter.FightScene
         [Inject] private DiContainer _diContainer;
         [Inject] private BalanceStorage _balanceStorage;
         private WeaponType _weaponType = WeaponType.Gun;
+        private CameraController.CameraController _cameraController;
+        private PlayerView _playerView;
 
         private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
         private Dictionary<RoomType, BaseRoom> RoomsDict => _balanceStorage.RoomsConfig.RoomsDict;
@@ -22,19 +23,10 @@ namespace CrazyShooter.FightScene
         {
             InitSpawnRoom();
             InitPlayer();
+            _cameraController = GetComponent<CameraController.CameraController>();
+            _cameraController.Player = _playerView;
         }
 
-        private void InitPlayer()
-        {
-            var player = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
-            var playerController =
-                _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
-                    player.transform);
-            playerController.UpdageControllerView(_weaponType);
-            player._playerController = playerController;
-            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(_weaponType);
-            player.InitWeapon(weapon, playerController.ShootJoystick);
-        }
 
         private void InitSpawnRoom(RoomData roomsData = null )
         {
@@ -45,6 +37,8 @@ namespace CrazyShooter.FightScene
             {
                 currentRoom =
                     _diContainer.InstantiatePrefabForComponent<SpawnRoom>(RoomsDict[roomsData.roomType], transform);
+
+                InitBorder(currentRoom, roomsData.BorderStates);
             }
             else
             {
@@ -57,24 +51,61 @@ namespace CrazyShooter.FightScene
             InitDependentRooms(roomsData.dependentRooms, currentRoom);
         }
 
+        private void InitBorder(BaseRoom currentRoom, List<BorderState> borderStates)
+        {
+            if(borderStates.Count == 0)
+                return;
+
+            foreach (var borderState in borderStates)
+            {
+                switch (borderState.borderSide)
+                {
+                    case DirectionType.Left:
+                        currentRoom.LeftBorder.SetState(borderState.borderType);
+                        break;
+                    case DirectionType.Right:
+                        currentRoom.RightBorder.SetState(borderState.borderType);
+                        break;
+                    case DirectionType.Top:
+                        currentRoom.TopBorder.SetState(borderState.borderType);
+                        break;
+                    case DirectionType.Bottom:
+                        currentRoom.BottomBorder.SetState(borderState.borderType);
+                        break;
+                    default:
+                        Debug.LogError("There is no case for borderSide " + borderState.borderSide);
+                        break;
+                }
+            }
+        }
+
         private void InitDependentRooms(List<RoomData> dependentRooms, BaseRoom previouseRoom)
         {
             foreach (var room in dependentRooms)
             {
                 var instantiatedRoom =
                     _diContainer.InstantiatePrefabForComponent<EnemyRoom>(RoomsDict[room.roomType], transform);
-                var pos = previouseRoom.GetRoomPosition(instantiatedRoom, room.roomDirectionType);
+                var pos = previouseRoom.GetRoomPosition(instantiatedRoom, room.directionType);
                 instantiatedRoom.transform.localPosition = pos;
+                InitBorder(instantiatedRoom, room.BorderStates);
                 
                 if (room.dependentRooms.Count == 0)
                     continue;
             
                 InitDependentRooms(room.dependentRooms, instantiatedRoom);
             }
-
-
-            // if (roomData.dependentRooms.Count > 0)
-            //     InitDependentRooms(roomData.dependentRooms);
+        }
+        
+        private void InitPlayer()
+        {
+            _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
+            var playerController =
+                _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
+                    _playerView.transform);
+            playerController.UpdageControllerView(_weaponType);
+            _playerView._playerController = playerController;
+            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(_weaponType);
+            _playerView.InitWeapon(weapon, playerController.ShootJoystick);
         }
     }
 }

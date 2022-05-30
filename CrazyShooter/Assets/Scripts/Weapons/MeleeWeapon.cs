@@ -1,13 +1,13 @@
 using System;
-using CrayzShooter.Enum;
+using CrazyShooter.Enum;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CrayzShooter.Configs;
+using CrazyShooter.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace CrayzShooter.Weapons
+namespace CrazyShooter.Weapons
 {
     public class MeleeWeapon : Weapon
     {

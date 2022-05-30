@@ -11,17 +11,17 @@ namespace CrazyShooter.Rooms
     {
         [SerializeField] private RoomType roomType;
         [SerializeField] private GameObject plane;
-        [SerializeField] private GameObject leftBorder;
-        [SerializeField] private GameObject rightBorder;
-        [SerializeField] private GameObject topBorder;
-        [SerializeField] private GameObject bottomBorder;
+        [SerializeField] private Border leftBorder;
+        [SerializeField] private Border rightBorder;
+        [SerializeField] private Border topBorder;
+        [SerializeField] private Border bottomBorder;
         [SerializeField] private int index;
 
         public GameObject Plane => plane;
-        public GameObject LeftBorder => leftBorder;
-        public GameObject RightBorder => rightBorder;
-        public GameObject TopBorder => topBorder;
-        public GameObject BottomBorder => bottomBorder;
+        public Border LeftBorder => leftBorder;
+        public Border RightBorder => rightBorder;
+        public Border TopBorder => topBorder;
+        public Border BottomBorder => bottomBorder;
         public RoomType RoomType => roomType;
        
         
@@ -51,48 +51,44 @@ namespace CrazyShooter.Rooms
 
         private void Awake()
         {
-            leftBorder.SetActive((true));
-            rightBorder.SetActive((true));
-            TopBorder.SetActive((true));
-            BottomBorder.SetActive((true));
+            leftBorder.gameObject.SetActive((true));
+            rightBorder.gameObject.SetActive((true));
+            TopBorder.gameObject.SetActive((true));
+            BottomBorder.gameObject.SetActive((true));
         }
 
-        public Vector3 GetRoomPosition(BaseRoom installedRoom, RoomDirectionType directionType)
+        public Vector3 GetRoomPosition(BaseRoom installedRoom, DirectionType directionType)
         {
             var sideCenter = Vector3.zero;
             var posOffset = 0f;
             switch (directionType)
             {
-                case RoomDirectionType.Left:
+                case DirectionType.Left:
                      posOffset = transform.position.x - GetRoomSize().x / 2
                                                          - installedRoom.GetRoomSize().x / 2;
                     sideCenter = new Vector3( posOffset, leftBorder.transform.position.y, 0);
                      
-                    leftBorder.gameObject.SetActive(false);
                     installedRoom.RightBorder.gameObject.SetActive(false);
                     break;
-                case RoomDirectionType.Right:
+                case DirectionType.Right:
                      posOffset = transform.position.x + GetRoomSize().x / 2
                                                          + installedRoom.GetRoomSize().x / 2;
                      
                     sideCenter = new Vector3( posOffset, rightBorder.transform.position.y, 0);
-                    rightBorder.gameObject.SetActive(false);
                     installedRoom.LeftBorder.gameObject.SetActive(false);
                     break;
-                case RoomDirectionType.Top:
+                case DirectionType.Top:
                     posOffset = transform.position.y + GetRoomSize().y / 2
                                                      + installedRoom.GetRoomSize().y / 2;
                     
                     sideCenter = new Vector3( topBorder.transform.position.x, posOffset, 0);
-                    topBorder.gameObject.SetActive(false);
                     installedRoom.BottomBorder.gameObject.SetActive(false);
                     break;
-                case RoomDirectionType.Bottom:
+                case DirectionType.Bottom:
                     posOffset = transform.position.y - GetRoomSize().y / 2
                                                      - installedRoom.GetRoomSize().y / 2;
                     
                     sideCenter = new Vector3( topBorder.transform.position.x, posOffset, 0);
-                    bottomBorder.gameObject.SetActive(false);
                     installedRoom.TopBorder.gameObject.SetActive(false);
                     break;
                 default:
@@ -102,10 +98,15 @@ namespace CrazyShooter.Rooms
             return sideCenter;
         }
 
-        public Vector2 GetRoomSize()
+        private Vector2 GetRoomSize()
         {
             var sprite = Plane.GetComponent<SpriteRenderer>();
             return sprite.size;
+        }
+
+        public void OpenDoor()
+        {
+            
         }
     }
     

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CrazyShooter.Configs;
 using UnityEngine;
 
-namespace CrayzShooter.Configs
+namespace CrazyShooter.Configs
 {
     [CreateAssetMenu(fileName = "BalanceStorage", menuName = "Storages/BalanceStorage")]
     public class BalanceStorage : ScriptableObject

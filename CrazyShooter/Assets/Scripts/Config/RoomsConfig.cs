@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CrazyShooter.Enums;
 using CrazyShooter.Rooms;
+using Enums;
 using UnityEngine;
 
 namespace CrazyShooter.Configs
@@ -30,9 +31,20 @@ namespace CrazyShooter.Configs
     [Serializable]
     public class RoomData
     {
+        [SerializeField]
+        private List<BorderState> borderStates;
         public RoomType roomType;
-        public RoomDirectionType roomDirectionType;
+        public DirectionType directionType;
         public List<RoomData> dependentRooms;
+
+        public List<BorderState> BorderStates => borderStates;
+    }
+
+    [Serializable]
+    public class BorderState
+    {
+        public DirectionType borderSide;
+        public BorderType borderType;
     }
     
 }

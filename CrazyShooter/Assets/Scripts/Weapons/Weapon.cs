@@ -1,9 +1,9 @@
-using CrayzShooter.Enum;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Enum;
 using UnityEngine;
 
-namespace CrayzShooter.Weapons
+namespace CrazyShooter.Weapons
 {
     public abstract class Weapon : MonoBehaviour
     {

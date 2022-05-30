@@ -5,7 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CrayzShooter.Editor.UI
+namespace CrazyShooter.Editor.UI
 {
     public class CustomButtonCreateAsset : UnityEditor.Editor
     {

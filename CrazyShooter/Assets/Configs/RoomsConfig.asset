@@ -14,23 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms:
   - {fileID: 7308536598290164831, guid: b0085ff71dce7ce4dbc8dbe3107d4afb, type: 3}
-  - {fileID: 5669891211414754563, guid: 3a020e1432a8519438e19d4499a1d178, type: 3}
+  - {fileID: 3232066100708412532, guid: eea7709f20e889c49bf5d82394592c1a, type: 3}
   roomsData:
+    borderStates:
+    - borderSide: 0
+      borderType: 0
     roomType: 0
-    roomDirectionType: 0
+    directionType: 0
     dependentRooms:
-    - roomType: 1
-      roomDirectionType: 0
+    - borderStates:
+      - borderSide: 0
+        borderType: 2
+      roomType: 1
+      directionType: 0
       dependentRooms:
-      - roomType: 1
-        roomDirectionType: 0
-        dependentRooms:
-        - roomType: 1
-          roomDirectionType: 2
-          dependentRooms: []
-    - roomType: 1
-      roomDirectionType: 2
-      dependentRooms: []
-    - roomType: 1
-      roomDirectionType: 1
-      dependentRooms: []
+      - borderStates: []
+        roomType: 1
+        directionType: 0
+        dependentRooms: []

@@ -5,7 +5,7 @@ using SMC.Tools.Coroutines;
 using SMC.Windows;
 using UnityEngine.SceneManagement;
 using Zenject;
-using CrayzShooter.Enum;
+using CrazyShooter.Enum;
 
 namespace CrazyShooter.System
 {

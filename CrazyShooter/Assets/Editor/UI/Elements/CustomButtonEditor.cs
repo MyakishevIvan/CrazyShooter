@@ -2,7 +2,7 @@ using CrazyShooter.UI;
 using UnityEditor;
 using UnityEditor.UI;
 
-namespace CrayzShooter.Editor.UI
+namespace CrazyShooter.Editor.UI
 {
     [CustomEditor(typeof(CustomButton), false)]
     [CanEditMultipleObjects]

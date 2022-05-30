@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CrayzShooter.Weapons
+namespace CrazyShooter.Weapons
 {
     public class Bullet : MonoBehaviour
     {

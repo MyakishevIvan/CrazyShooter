@@ -5,7 +5,7 @@ using CrazyShooter.UI;
 using SMC.Windows;
 using UnityEngine;
 
-namespace CrayzShooter.Windows
+namespace CrazyShooter.Windows
 {
     public class MenuWindow : Window<MenuWondowSetup>
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CrayzShooter.Enum;
+using CrazyShooter.Enum;
 using CrazyShooter.Enemies;
 using UnityEngine;
 

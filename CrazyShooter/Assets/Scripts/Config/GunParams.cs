@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CrayzShooter.Configs
+namespace CrazyShooter.Configs
 {
     [CreateAssetMenu(fileName = "GunParams", menuName = "Configs/GunParams")]
     public class GunParams : ScriptableObject

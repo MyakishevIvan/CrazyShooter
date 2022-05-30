@@ -1,6 +1,6 @@
 ﻿namespace CrazyShooter.Enums
 {
-    public enum RoomDirectionType
+    public enum DirectionType
     {
         Left = 0,
         Right = 1,

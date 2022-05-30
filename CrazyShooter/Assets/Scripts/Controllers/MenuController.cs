@@ -1,6 +1,6 @@
 using System;
-using CrayzShooter.Windows;
-using CrayzShooter.Enum;
+using CrazyShooter.Windows;
+using CrazyShooter.Enum;
 using CrazyShooter.System;
 using SMC.Windows;
 using System.Collections;

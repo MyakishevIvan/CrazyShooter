@@ -1,11 +1,11 @@
-using CrayzShooter.Enum;
-using CrayzShooter.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CrazyShooter.Enum;
+using CrazyShooter.Weapons;
 using UnityEngine;
 
-namespace CrayzShooter.Configs
+namespace CrazyShooter.Configs
 {
     [CreateAssetMenu(fileName ="WeaponsConfig", menuName = "Configs/WeaponsConfig")]
     public class WeaponsConfig : ScriptableObject
