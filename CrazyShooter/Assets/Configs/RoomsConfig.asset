@@ -15,3 +15,22 @@ MonoBehaviour:
   rooms:
   - {fileID: 7308536598290164831, guid: b0085ff71dce7ce4dbc8dbe3107d4afb, type: 3}
   - {fileID: 5669891211414754563, guid: 3a020e1432a8519438e19d4499a1d178, type: 3}
+  roomsData:
+    roomType: 0
+    roomDirectionType: 0
+    dependentRooms:
+    - roomType: 1
+      roomDirectionType: 0
+      dependentRooms:
+      - roomType: 1
+        roomDirectionType: 0
+        dependentRooms:
+        - roomType: 1
+          roomDirectionType: 2
+          dependentRooms: []
+    - roomType: 1
+      roomDirectionType: 2
+      dependentRooms: []
+    - roomType: 1
+      roomDirectionType: 1
+      dependentRooms: []
