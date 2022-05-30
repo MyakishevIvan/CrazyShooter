@@ -15,10 +15,8 @@ namespace CrazyShooter.Core
         [SerializeField] private Animator animator;
         [SerializeField] private Rigidbody2D rigidbody2D;
         [SerializeField] private Transform weaponTarget;
-        [SerializeField] private Weapon weapon;
         [SerializeField] private GameObject Head;
         [Inject] DiContainer _diContainer;
-        [Inject] private SignalBus _signal;
 
         public PlayerController _playerController { get; set; }
         public Rigidbody2D Rigidbody2D => rigidbody2D;
@@ -38,5 +36,6 @@ namespace CrazyShooter.Core
         {
             transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
+
     }
 }

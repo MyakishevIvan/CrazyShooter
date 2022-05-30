@@ -15,8 +15,8 @@ TagManager:
   - Player
   - Enemy
   - Room
-  - 
-  - 
+  - Interact
+  - Door
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
     locked: 0
   - name: Room
     uniqueID: 4118089891
+    locked: 0
+  - name: Enemy
+    uniqueID: 2961610845
     locked: 0
   - name: Player
     uniqueID: 1515702235

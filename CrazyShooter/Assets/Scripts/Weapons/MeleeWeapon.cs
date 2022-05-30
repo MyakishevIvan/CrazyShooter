@@ -91,7 +91,6 @@ namespace CrazyShooter.Weapons
                         isEndAngle = transform.eulerAngles.z >= endAngle -1;
                     }
                     
-
                     if (isEndAngle)
                     {
                         DamageEnemy();
@@ -104,7 +103,7 @@ namespace CrazyShooter.Weapons
                         Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, _startAngle),
                             Time.deltaTime * _speed);
 
-                    if ((int)transform.eulerAngles.z >= _startAngle)
+                    if (transform.eulerAngles.z >= _startAngle)
                     {
                         transform.rotation = Quaternion.Euler(0, 0, _startAngle);
                         _attacking = false;

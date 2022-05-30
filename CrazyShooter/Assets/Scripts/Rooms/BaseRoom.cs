@@ -15,7 +15,6 @@ namespace CrazyShooter.Rooms
         [SerializeField] private Border rightBorder;
         [SerializeField] private Border topBorder;
         [SerializeField] private Border bottomBorder;
-        [SerializeField] private int index;
 
         public GameObject Plane => plane;
         public Border LeftBorder => leftBorder;
@@ -102,11 +101,6 @@ namespace CrazyShooter.Rooms
         {
             var sprite = Plane.GetComponent<SpriteRenderer>();
             return sprite.size;
-        }
-
-        public void OpenDoor()
-        {
-            
         }
     }
     

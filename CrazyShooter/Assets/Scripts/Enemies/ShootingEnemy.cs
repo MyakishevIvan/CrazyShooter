@@ -6,7 +6,7 @@ namespace CrazyShooter.Enemies
 {
     public class ShootingEnemy : Enemy
     {
-        
+        [SerializeField] private Animator animator;
     }
     
 }

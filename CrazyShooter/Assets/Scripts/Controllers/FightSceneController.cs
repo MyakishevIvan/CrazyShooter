@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
 using CrazyShooter.Core;
 using CrazyShooter.Enum;
 using CrazyShooter.Configs;
+using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
+using CrazyShooter.Interactions;
 using CrazyShooter.Rooms;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace CrazyShooter.FightScene
 {
@@ -18,7 +22,10 @@ namespace CrazyShooter.FightScene
         private PlayerView _playerView;
 
         private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
+        private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
+        private EnemiesConfig EnemiesConfig => _balanceStorage.EnemiesConfig;
         private Dictionary<RoomType, BaseRoom> RoomsDict => _balanceStorage.RoomsConfig.RoomsDict;
+        
         private void Awake()
         {
             InitSpawnRoom();
@@ -79,6 +86,44 @@ namespace CrazyShooter.FightScene
             }
         }
 
+        private void InitEnemies(BaseRoom room,List<EnemyInRoom> enemies)
+        {
+            foreach (var enemy in enemies)
+            {
+                Enemy instantiatedEnemy;
+                var gun = WeaponsConfig.GetWeapon(enemy.weaponType);
+                var currentEnemy = EnemiesConfig.EnemyData[enemy.enemyType];
+
+                switch (enemy.enemyType)
+                {
+                    case EnemyType.melee:
+                        instantiatedEnemy =
+                            _diContainer.InstantiatePrefabForComponent<MeleeEnemy>(currentEnemy, room.transform);
+                        break;
+                    case EnemyType.shooter:
+                        instantiatedEnemy =
+                            _diContainer.InstantiatePrefabForComponent<ShootingEnemy>(currentEnemy, room.transform);
+                        break;
+                    default:
+                        throw new Exception("There is no case for " + enemy.enemyType);
+                        break;
+                }
+
+                ChangeEnemyPosition(room, instantiatedEnemy);
+               // instantiatedEnemy.InitWeapon(gun);
+                
+            }
+        }
+
+        private void ChangeEnemyPosition(BaseRoom room, Enemy enemy)
+        {
+            var enemyPos = enemy.transform.position;
+            var roomSize = room.Plane.GetComponent<SpriteRenderer>().size;
+            var xPos = Random.Range(enemyPos.x - roomSize.x / 2, enemyPos.x + roomSize.x / 2);
+            var yPos = Random.Range(enemyPos.y - roomSize.y / 2, enemyPos.y + roomSize.y / 2);
+            enemy.transform.position = new Vector3(xPos, yPos, 0);
+        }
+
         private void InitDependentRooms(List<RoomData> dependentRooms, BaseRoom previouseRoom)
         {
             foreach (var room in dependentRooms)
@@ -89,10 +134,11 @@ namespace CrazyShooter.FightScene
                 instantiatedRoom.transform.localPosition = pos;
                 InitBorder(instantiatedRoom, room.BorderStates);
                 
-                if (room.dependentRooms.Count == 0)
-                    continue;
-            
-                InitDependentRooms(room.dependentRooms, instantiatedRoom);
+                if (room.dependentRooms.Count > 0)
+                    InitDependentRooms(room.dependentRooms, instantiatedRoom);
+
+                if (room.EnemyInRooms.Count > 0)
+                    InitEnemies(instantiatedRoom, room.EnemyInRooms);
             }
         }
         
@@ -101,6 +147,8 @@ namespace CrazyShooter.FightScene
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
             var playerController =
                 _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
+                    _playerView.transform); 
+            _diContainer.InstantiatePrefabForComponent<InteractionsController>(PlayerConfig.InteractionsController,
                     _playerView.transform);
             playerController.UpdageControllerView(_weaponType);
             _playerView._playerController = playerController;

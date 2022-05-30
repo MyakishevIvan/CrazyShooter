@@ -15,5 +15,6 @@ MonoBehaviour:
   weapons:
   - {fileID: 4840833878484093943, guid: 5e505782137cd2040bd9d8bcaf838237, type: 3}
   - {fileID: 6359888681355758505, guid: 0e35a15b2a9054d4cbec53a0f431661d, type: 3}
+  - {fileID: 3060505351820040990, guid: acb20ea0de8a64845937888cce526a3f, type: 3}
   gunParams: {fileID: 11400000, guid: 93cd2aaf1b9788940a3d2532b7968e78, type: 2}
   swordParams: {fileID: 11400000, guid: 1c062a9d342cbd44ca4787d789eb4ea5, type: 2}

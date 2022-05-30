@@ -16,7 +16,8 @@ namespace CrazyShooter.Configs
 
         public GunParams GunParams => gunParams;
         public SwordParams SwordParams => swordParams;
-
+        
+//TODO: Возможно переписать
         public Weapon GetWeapon(WeaponType weaponType)
         {
             Weapon result = null;
@@ -27,6 +28,9 @@ namespace CrazyShooter.Configs
                     result = weapon as Sword;
                     break;
                 case WeaponType.Gun:
+                    result = weapon as Gun;
+                    break;
+                case WeaponType.SmallGun:
                     result = weapon as Gun;
                     break;
                 default:

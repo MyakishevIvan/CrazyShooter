@@ -15,3 +15,4 @@ MonoBehaviour:
   playerConfig: {fileID: 11400000, guid: 2d1cff1f3caabad4aa49aab1cdc753ae, type: 2}
   weaponsConfig: {fileID: 11400000, guid: 40b795e193a6ef04695f692d5b81b966, type: 2}
   roomsConfig: {fileID: 11400000, guid: 869461eff07f82a4e861a71708845264, type: 2}
+  enemiesConfig: {fileID: 11400000, guid: cc7a581bbef95214582994853c86dba3, type: 2}

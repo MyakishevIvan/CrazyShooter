@@ -11,8 +11,10 @@ namespace CrazyShooter.Configs
         [SerializeField] private PlayerConfig playerConfig;
         [SerializeField] private WeaponsConfig weaponsConfig;
         [SerializeField] private RoomsConfig roomsConfig;
+        [SerializeField] private EnemiesConfig enemiesConfig;
         public PlayerConfig PlayerConfig => playerConfig;
         public WeaponsConfig WeaponsConfig => weaponsConfig;
         public RoomsConfig RoomsConfig => roomsConfig;
+        public EnemiesConfig EnemiesConfig => enemiesConfig;
     }
 }

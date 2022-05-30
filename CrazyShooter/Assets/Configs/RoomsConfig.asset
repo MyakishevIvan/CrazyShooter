@@ -19,16 +19,29 @@ MonoBehaviour:
     borderStates:
     - borderSide: 0
       borderType: 0
+    enemyInRooms: []
     roomType: 0
     directionType: 0
     dependentRooms:
     - borderStates:
       - borderSide: 0
         borderType: 2
+      - borderSide: 3
+        borderType: 2
+      - borderSide: 2
+        borderType: 2
+      enemyInRooms:
+      - enemyType: 0
+        weaponType: 0
+      - enemyType: 1
+        weaponType: 2
       roomType: 1
       directionType: 0
       dependentRooms:
       - borderStates: []
+        enemyInRooms:
+        - enemyType: 1
+          weaponType: 1
         roomType: 1
         directionType: 0
         dependentRooms: []

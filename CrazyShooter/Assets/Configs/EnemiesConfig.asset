@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData:
   - enemy: {fileID: 6360856678793136299, guid: 68b250c1abc8de64e8f86b56f33c79c3, type: 3}
-    hp: 100
-    weaponType: 0
+    enemyType: 0
   - enemy: {fileID: 1385322503497393648, guid: 7f2b439e53b6ef7409a223dc426f3464, type: 3}
-    hp: 100
-    weaponType: 1
+    enemyType: 1

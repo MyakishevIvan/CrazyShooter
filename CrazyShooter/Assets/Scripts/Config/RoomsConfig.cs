@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CrazyShooter.Enum;
 using CrazyShooter.Enums;
 using CrazyShooter.Rooms;
 using Enums;
@@ -33,11 +34,14 @@ namespace CrazyShooter.Configs
     {
         [SerializeField]
         private List<BorderState> borderStates;
+
+        [SerializeField] private List<EnemyInRoom> enemyInRooms;
         public RoomType roomType;
         public DirectionType directionType;
         public List<RoomData> dependentRooms;
 
         public List<BorderState> BorderStates => borderStates;
+        public List<EnemyInRoom> EnemyInRooms => enemyInRooms;
     }
 
     [Serializable]
@@ -46,5 +50,11 @@ namespace CrazyShooter.Configs
         public DirectionType borderSide;
         public BorderType borderType;
     }
-    
+
+    [Serializable]
+    public class EnemyInRoom
+    {
+        public EnemyType enemyType;
+        public WeaponType weaponType;
+    }
 }
