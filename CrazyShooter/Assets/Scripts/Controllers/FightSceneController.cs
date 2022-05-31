@@ -7,6 +7,7 @@ using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using CrazyShooter.Interactions;
 using CrazyShooter.Rooms;
+using Enums;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -17,7 +18,6 @@ namespace CrazyShooter.FightScene
     {
         [Inject] private DiContainer _diContainer;
         [Inject] private BalanceStorage _balanceStorage;
-        private WeaponType _weaponType = WeaponType.Gun;
         private CameraController.CameraController _cameraController;
         private PlayerView _playerView;
 
@@ -33,11 +33,10 @@ namespace CrazyShooter.FightScene
             _cameraController = GetComponent<CameraController.CameraController>();
             _cameraController.Player = _playerView;
         }
-
-
-        private void InitSpawnRoom(RoomData roomsData = null )
+        
+        private void InitSpawnRoom()
         {
-            roomsData ??= _balanceStorage.RoomsConfig.RoomsData;
+            var roomsData = _balanceStorage.RoomsConfig.RoomsData;
             BaseRoom currentRoom = null;
             
             if (roomsData.roomType == RoomType.SpawnRoom)
@@ -110,7 +109,7 @@ namespace CrazyShooter.FightScene
                 }
 
                 ChangeEnemyPosition(room, instantiatedEnemy);
-               // instantiatedEnemy.InitWeapon(gun);
+               instantiatedEnemy.InitWeapon(CharacterType.Enemy, gun);
                 
             }
         }
@@ -145,15 +144,17 @@ namespace CrazyShooter.FightScene
         private void InitPlayer()
         {
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
+            
             var playerController =
                 _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
                     _playerView.transform); 
             _diContainer.InstantiatePrefabForComponent<InteractionsController>(PlayerConfig.InteractionsController,
                     _playerView.transform);
-            playerController.UpdageControllerView(_weaponType);
+            
             _playerView._playerController = playerController;
-            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(_weaponType);
-            _playerView.InitWeapon(weapon, playerController.ShootJoystick);
+            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(WeaponType.Gun);
+            _playerView.SetWeapon(CharacterType.PLayer,ref weapon, playerController.ShootJoystick);
+            playerController.SetWeapon(weapon);
         }
     }
 }

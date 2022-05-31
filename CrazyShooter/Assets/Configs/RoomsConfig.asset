@@ -34,14 +34,14 @@ MonoBehaviour:
       - enemyType: 0
         weaponType: 0
       - enemyType: 1
-        weaponType: 2
+        weaponType: 0
       roomType: 1
       directionType: 0
       dependentRooms:
       - borderStates: []
         enemyInRooms:
         - enemyType: 1
-          weaponType: 1
+          weaponType: 0
         roomType: 1
         directionType: 0
         dependentRooms: []

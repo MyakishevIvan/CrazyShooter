@@ -1,9 +1,6 @@
-using System;
-using CrazyShooter.Enum;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using CrazyShooter.Configs;
+using Enums;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +15,7 @@ namespace CrazyShooter.Weapons
         private float _speed;
         private float _damage;
         private int _startAngle;
-        private bool _attacking;
+        public bool IsAttacking { get; set; }
 
         private SwordParams SwordParams => _balance.WeaponsConfig.SwordParams;
         private int angleIndex => transform.lossyScale.x >= 0 ? 1 : -1;
@@ -27,36 +24,19 @@ namespace CrazyShooter.Weapons
            transform.rotation = Quaternion.Euler(0f,0f,0f);
         }
 
-        public override void Init(Joystick weaponJoystick)
+        public override void Init(CharacterType characterType, Joystick weaponJoystick)
         {
+            _characterType = characterType;
             _angle = SwordParams.Angle;
             _speed = SwordParams.Speed;
             _damage = SwordParams.Damage;
         }
-
-        private void Update()
-        {
-#if UNITY_EDITOR || UNITY_STANDALONE
-            if (Input.GetMouseButton(0) && !_attacking)
-#else
-                if(Input.touchCount> 0)
-            
-#endif
-            {
-                _startAngle = 0;
-                _attacking = true;
-                StopAllCoroutines();
-                StartCoroutine(Attack());
-            }
-        }
-
+        
         private void DamageEnemy()
         {
             var enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
                _balance.PlayerConfig.EnemyLayer);
-            for (int i = 0; i < enemies.Length; i++)
-            {
-            }
+           
         }
 
         private void OnDrawGizmos()
@@ -65,12 +45,19 @@ namespace CrazyShooter.Weapons
             Gizmos.DrawWireSphere(attackPos.position, attackRange);
         }
 
+        public void StartAttack()
+        {
+            _startAngle = 0;
+            IsAttacking = true;
+            StopAllCoroutines();
+            StartCoroutine(Attack());
+        }
         private IEnumerator Attack()
         {
             var swordDown = false;
             var index = angleIndex;
 
-            while (_attacking)
+            while (IsAttacking)
             {
                 if (!swordDown)
                 {
@@ -106,12 +93,17 @@ namespace CrazyShooter.Weapons
                     if (transform.eulerAngles.z >= _startAngle)
                     {
                         transform.rotation = Quaternion.Euler(0, 0, _startAngle);
-                        _attacking = false;
+                        IsAttacking = false;
                     }
                 }
 
                 yield return null;
             }
+        }
+        
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
     }
 }

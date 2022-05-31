@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Enums;
 using CrazyShooter.Weapons;
+using Enums;
 using UnityEngine;
 using Zenject;
 
@@ -13,11 +14,12 @@ namespace  CrazyShooter.Enemies
         [Inject] DiContainer _diContainer;
 
 
-        public virtual void InitWeapon(Weapon weapon)
+        public virtual void InitWeapon(CharacterType characterType, Weapon weapon)
         {
             var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-            currentWeapon.Init();
-            currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "Enemy";
+            currentWeapon.Init(characterType);
+            var sortingLayerName = characterType == CharacterType.PLayer ? "PlayerWeapon" : "EnemyWeapon";
+            currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = sortingLayerName;
   
         }
 

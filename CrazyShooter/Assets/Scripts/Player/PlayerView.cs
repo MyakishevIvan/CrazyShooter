@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Signals;
 using CrazyShooter.Weapons;
+using Enums;
 using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
@@ -21,11 +22,11 @@ namespace CrazyShooter.Core
         public PlayerController _playerController { get; set; }
         public Rigidbody2D Rigidbody2D => rigidbody2D;
 
-        public void InitWeapon(Weapon weapon, Joystick weaponJoystick)
+        public void SetWeapon(CharacterType characterType, ref Weapon weapon, Joystick weaponJoystick)
         {
-            var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-            currentWeapon.Init(weaponJoystick);
-            currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+             weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
+             weapon.Init(characterType,  weaponJoystick);
+             weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
         public void PlayAnimation(bool isRun)
         {
