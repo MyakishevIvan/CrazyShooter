@@ -16,7 +16,6 @@ namespace CrazyShooter.Core
         [SerializeField] private Animator animator;
         [SerializeField] private Rigidbody2D rigidbody2D;
         [SerializeField] private Transform weaponTarget;
-        [SerializeField] private GameObject Head;
         [Inject] DiContainer _diContainer;
 
         public PlayerController _playerController { get; set; }
@@ -25,7 +24,7 @@ namespace CrazyShooter.Core
         public void SetWeapon(CharacterType characterType, ref Weapon weapon, Joystick weaponJoystick)
         {
              weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-             weapon.Init(characterType,  weaponJoystick);
+             weapon.Init();
              weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
         public void PlayAnimation(bool isRun)

@@ -25,7 +25,7 @@ namespace CrazyShooter.FightScene
         private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
         private EnemiesConfig EnemiesConfig => _balanceStorage.EnemiesConfig;
         private Dictionary<RoomType, BaseRoom> RoomsDict => _balanceStorage.RoomsConfig.RoomsDict;
-        
+
         private void Awake()
         {
             InitSpawnRoom();
@@ -33,12 +33,12 @@ namespace CrazyShooter.FightScene
             _cameraController = GetComponent<CameraController.CameraController>();
             _cameraController.Player = _playerView;
         }
-        
+
         private void InitSpawnRoom()
         {
             var roomsData = _balanceStorage.RoomsConfig.RoomsData;
             BaseRoom currentRoom = null;
-            
+
             if (roomsData.roomType == RoomType.SpawnRoom)
             {
                 currentRoom =
@@ -53,13 +53,13 @@ namespace CrazyShooter.FightScene
 
             if (roomsData.dependentRooms.Count == 0)
                 return;
-            
+
             InitDependentRooms(roomsData.dependentRooms, currentRoom);
         }
 
         private void InitBorder(BaseRoom currentRoom, List<BorderState> borderStates)
         {
-            if(borderStates.Count == 0)
+            if (borderStates.Count == 0)
                 return;
 
             foreach (var borderState in borderStates)
@@ -85,11 +85,12 @@ namespace CrazyShooter.FightScene
             }
         }
 
-        private void InitEnemies(BaseRoom room,List<EnemyInRoom> enemies)
+        private List<Enemy> InitEnemies(BaseRoom room, List<EnemyInRoom> enemies)
         {
+            var enemiesList = new List<Enemy>();
+            Enemy instantiatedEnemy;
             foreach (var enemy in enemies)
             {
-                Enemy instantiatedEnemy;
                 var gun = WeaponsConfig.GetWeapon(enemy.weaponType);
                 var currentEnemy = EnemiesConfig.EnemyData[enemy.enemyType];
 
@@ -109,9 +110,11 @@ namespace CrazyShooter.FightScene
                 }
 
                 ChangeEnemyPosition(room, instantiatedEnemy);
-               instantiatedEnemy.InitWeapon(CharacterType.Enemy, gun);
-                
+                instantiatedEnemy.InitWeapon(CharacterType.Enemy, gun);
+                enemiesList.Add(instantiatedEnemy);
             }
+
+            return enemiesList;
         }
 
         private void ChangeEnemyPosition(BaseRoom room, Enemy enemy)
@@ -129,31 +132,35 @@ namespace CrazyShooter.FightScene
             {
                 var instantiatedRoom =
                     _diContainer.InstantiatePrefabForComponent<EnemyRoom>(RoomsDict[room.roomType], transform);
+
                 var pos = previouseRoom.GetRoomPosition(instantiatedRoom, room.directionType);
                 instantiatedRoom.transform.localPosition = pos;
                 InitBorder(instantiatedRoom, room.BorderStates);
-                
+
                 if (room.dependentRooms.Count > 0)
                     InitDependentRooms(room.dependentRooms, instantiatedRoom);
 
                 if (room.EnemyInRooms.Count > 0)
-                    InitEnemies(instantiatedRoom, room.EnemyInRooms);
+                {
+                    var enemyInRoom = InitEnemies(instantiatedRoom, room.EnemyInRooms);
+                    instantiatedRoom.EnemiesInRoom = enemyInRoom;
+                }
             }
         }
-        
+
         private void InitPlayer()
         {
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
-            
+
             var playerController =
                 _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
-                    _playerView.transform); 
-            _diContainer.InstantiatePrefabForComponent<InteractionsController>(PlayerConfig.InteractionsController,
                     _playerView.transform);
-            
+            _diContainer.InstantiatePrefabForComponent<InteractionsController>(PlayerConfig.InteractionsController,
+                _playerView.transform);
+
             _playerView._playerController = playerController;
-            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(WeaponType.Gun);
-            _playerView.SetWeapon(CharacterType.PLayer,ref weapon, playerController.ShootJoystick);
+            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(WeaponType.Sword);
+            _playerView.SetWeapon(CharacterType.PLayer, ref weapon, playerController.ShootJoystick);
             playerController.SetWeapon(weapon);
         }
     }

@@ -24,9 +24,8 @@ namespace CrazyShooter.Weapons
            transform.rotation = Quaternion.Euler(0f,0f,0f);
         }
 
-        public override void Init(CharacterType characterType, Joystick weaponJoystick)
+        public override void Init()
         {
-            _characterType = characterType;
             _angle = SwordParams.Angle;
             _speed = SwordParams.Speed;
             _damage = SwordParams.Damage;

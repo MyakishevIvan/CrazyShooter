@@ -15,19 +15,18 @@ namespace CrazyShooter.Weapons
         [Inject] private DiContainer _diContainer;
         private Vector3 _shootingVector;
         public bool IsShooting { get; set; }
-        [SerializeField] private Joystick shootJoystick;
 
         private GunParams GunParams => _balance.WeaponsConfig.GunParams;
         private float BulletSpeed { get; set; }
         private float ReloadTime { get; set; }
+        private float Damage { get; set; }
 
 
 
-        public override void Init(CharacterType characterType, Joystick joystick)
+        public override void Init()
         {
-            _characterType = characterType;
-            shootJoystick = joystick;
             BulletSpeed = GunParams.Bulletspeed;
+            Damage = GunParams.Damage;
             ReloadTime = GunParams.ReloadTime;
             StartCoroutine(Shooting());
         }

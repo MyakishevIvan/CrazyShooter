@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Core;
+using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using UnityEditor;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace CrazyShooter.Rooms
         public Border TopBorder => topBorder;
         public Border BottomBorder => bottomBorder;
         public RoomType RoomType => roomType;
-       
+        private Vector2 RoomSize =>  Plane.GetComponent<SpriteRenderer>().size;
         
 #if UNITY_EDITOR
         protected virtual void OnValidate()
@@ -63,29 +65,29 @@ namespace CrazyShooter.Rooms
             switch (directionType)
             {
                 case DirectionType.Left:
-                     posOffset = transform.position.x - GetRoomSize().x / 2
-                                                         - installedRoom.GetRoomSize().x / 2;
+                     posOffset = transform.position.x - RoomSize.x / 2
+                                                         - installedRoom.RoomSize.x / 2;
                     sideCenter = new Vector3( posOffset, leftBorder.transform.position.y, 0);
                      
                     installedRoom.RightBorder.gameObject.SetActive(false);
                     break;
                 case DirectionType.Right:
-                     posOffset = transform.position.x + GetRoomSize().x / 2
-                                                         + installedRoom.GetRoomSize().x / 2;
+                     posOffset = transform.position.x + RoomSize.x / 2
+                                                         + installedRoom.RoomSize.x / 2;
                      
                     sideCenter = new Vector3( posOffset, rightBorder.transform.position.y, 0);
                     installedRoom.LeftBorder.gameObject.SetActive(false);
                     break;
                 case DirectionType.Top:
-                    posOffset = transform.position.y + GetRoomSize().y / 2
-                                                     + installedRoom.GetRoomSize().y / 2;
+                    posOffset = transform.position.y +RoomSize.y / 2
+                                                     + installedRoom.RoomSize.y / 2;
                     
                     sideCenter = new Vector3( topBorder.transform.position.x, posOffset, 0);
                     installedRoom.BottomBorder.gameObject.SetActive(false);
                     break;
                 case DirectionType.Bottom:
-                    posOffset = transform.position.y - GetRoomSize().y / 2
-                                                     - installedRoom.GetRoomSize().y / 2;
+                    posOffset = transform.position.y - RoomSize.y / 2
+                                                     - installedRoom.RoomSize.y / 2;
                     
                     sideCenter = new Vector3( topBorder.transform.position.x, posOffset, 0);
                     installedRoom.TopBorder.gameObject.SetActive(false);
@@ -95,12 +97,6 @@ namespace CrazyShooter.Rooms
                     break;
             }
             return sideCenter;
-        }
-
-        private Vector2 GetRoomSize()
-        {
-            var sprite = Plane.GetComponent<SpriteRenderer>();
-            return sprite.size;
         }
     }
     

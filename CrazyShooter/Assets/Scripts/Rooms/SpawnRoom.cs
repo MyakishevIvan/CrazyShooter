@@ -6,7 +6,6 @@ namespace CrazyShooter.Rooms
 {
     public class SpawnRoom : BaseRoom
     {
-        [SerializeField] private Transform spawnPos;
     }
     
 }
