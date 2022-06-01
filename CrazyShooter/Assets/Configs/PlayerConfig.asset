@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 7548150803131422207, guid: 4bfd1a5459c1ab645aa5b09f6f7ac097, type: 3}
   interactionsController: {fileID: 801477175993410903, guid: 6ab1fa95b0bfe6c49b9a644e52cd1c6a, type: 3}
-  player: {fileID: 4065806040829728622, guid: faf9e61749dea6e448287310159eae69, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  playerStats:
-    playerSpeed: 10
-    hp: 100
-    damage: 10
+  playerDataList:
+  - playerView: {fileID: 4065806040829728622, guid: faf9e61749dea6e448287310159eae69, type: 3}
+    playerStats:
+      playerSpeed: 5
+      hp: 100
+      damage: 20
