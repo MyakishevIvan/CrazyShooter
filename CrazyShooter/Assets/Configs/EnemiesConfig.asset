@@ -12,8 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8d526b337175b4698b5942d89f510f, type: 3}
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: 
-  enemyData:
+  enemiesDataList:
   - enemy: {fileID: 6360856678793136299, guid: 68b250c1abc8de64e8f86b56f33c79c3, type: 3}
     enemyType: 0
   - enemy: {fileID: 1385322503497393648, guid: 7f2b439e53b6ef7409a223dc426f3464, type: 3}
     enemyType: 1
+  enemiesStatsList:
+  - difficultyType: 0
+    runSpeed: 5
+    hp: 100
+    damage: 10
+  - difficultyType: 1
+    runSpeed: 10
+    hp: 200
+    damage: 30
+  - difficultyType: 2
+    runSpeed: 15
+    hp: 400
+    damage: 60

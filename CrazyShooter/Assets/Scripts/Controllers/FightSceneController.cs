@@ -20,6 +20,7 @@ namespace CrazyShooter.FightScene
         [Inject] private BalanceStorage _balanceStorage;
         private CameraController.CameraController _cameraController;
         private PlayerView _playerView;
+        private EnemyStats _enemyStats;
 
         private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
         private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
@@ -28,10 +29,17 @@ namespace CrazyShooter.FightScene
 
         private void Awake()
         {
+            InitStats();
             InitSpawnRoom();
             InitPlayer();
+            
             _cameraController = GetComponent<CameraController.CameraController>();
             _cameraController.Player = _playerView;
+        }
+
+        private void InitStats()
+        {
+            _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[DifficultyType.Low];
         }
 
         private void InitSpawnRoom()
@@ -92,7 +100,7 @@ namespace CrazyShooter.FightScene
             foreach (var enemy in enemies)
             {
                 var gun = WeaponsConfig.GetWeapon(enemy.weaponType);
-                var currentEnemy = EnemiesConfig.EnemyData[enemy.enemyType];
+                var currentEnemy = EnemiesConfig.EnemiesData[enemy.enemyType];
 
                 switch (enemy.enemyType)
                 {
@@ -110,7 +118,7 @@ namespace CrazyShooter.FightScene
                 }
 
                 ChangeEnemyPosition(room, instantiatedEnemy);
-                instantiatedEnemy.InitWeapon(CharacterType.Enemy, gun);
+                instantiatedEnemy.InitEnemy(gun, _enemyStats);
                 enemiesList.Add(instantiatedEnemy);
             }
 
@@ -160,7 +168,7 @@ namespace CrazyShooter.FightScene
 
             _playerView._playerController = playerController;
             var weapon = _balanceStorage.WeaponsConfig.GetWeapon(WeaponType.Sword);
-            _playerView.SetWeapon(CharacterType.PLayer, ref weapon, playerController.ShootJoystick);
+            _playerView.SetWeapon(ref weapon);
             playerController.SetWeapon(weapon);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace CrazyShooter.Enums
 {
     public enum CharacterType
     {

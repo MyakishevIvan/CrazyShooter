@@ -14,6 +14,7 @@ namespace CrazyShooter.Weapons
         private int _angle;
         private float _speed;
         private float _damage;
+        private float _delay = 0.5f;
         private int _startAngle;
         public bool IsAttacking { get; set; }
 
@@ -92,13 +93,17 @@ namespace CrazyShooter.Weapons
                     if (transform.eulerAngles.z >= _startAngle)
                     {
                         transform.rotation = Quaternion.Euler(0, 0, _startAngle);
-                        IsAttacking = false;
+                        Invoke("DelayAttack", _delay);
+                        StopAllCoroutines();
+                        
                     }
                 }
 
                 yield return null;
             }
         }
+
+        private void DelayAttack() => IsAttacking = false;
         
         private void OnDisable()
         {

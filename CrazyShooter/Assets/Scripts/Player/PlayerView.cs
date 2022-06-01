@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Enums;
 using CrazyShooter.Signals;
 using CrazyShooter.Weapons;
 using Enums;
@@ -21,7 +22,7 @@ namespace CrazyShooter.Core
         public PlayerController _playerController { get; set; }
         public Rigidbody2D Rigidbody2D => rigidbody2D;
 
-        public void SetWeapon(CharacterType characterType, ref Weapon weapon, Joystick weaponJoystick)
+        public void SetWeapon(ref Weapon weapon)
         {
              weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
              weapon.Init();

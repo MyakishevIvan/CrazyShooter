@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 801477175993410903}
   m_Layer: 9
   m_Name: InteractionsController
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
