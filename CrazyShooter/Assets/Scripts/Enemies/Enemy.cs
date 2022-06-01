@@ -17,10 +17,10 @@ namespace  CrazyShooter.Enemies
         protected bool IsAttacking { get; set;}
         protected EnemyStats EnemyStats { get; set;}
 
-        public virtual void InitEnemy(Weapon weapon, EnemyStats stats)
+        public virtual void InitEnemy(WeaponData weaponData, EnemyStats stats)
         {
-            var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-            currentWeapon.Init();
+            var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
+            currentWeapon.Init(weaponData.WeaponStats);
             currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "EnemyWeapon";
             Weapon = currentWeapon;
             EnemyStats = stats;

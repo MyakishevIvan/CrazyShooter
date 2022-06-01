@@ -13,21 +13,18 @@ namespace CrazyShooter.Weapons
         [SerializeField] private Bullet bullet;
         [Inject] private BalanceStorage _balance;
         [Inject] private DiContainer _diContainer;
+        private GunStats _gunStats;
         private Vector3 _shootingVector;
         public bool IsShooting { get; set; }
 
-        private GunParams GunParams => _balance.WeaponsConfig.GunParams;
-        private float BulletSpeed { get; set; }
-        private float ReloadTime { get; set; }
-        private float Damage { get; set; }
+        private GunStats GunStats => (GunStats)_balance.WeaponsConfig.WeaponsDataDict[Enum.WeaponType.Gun].WeaponStats;
+      
 
 
 
-        public override void Init()
+        public override void Init(WeaponStats weaponStats)
         {
-            BulletSpeed = GunParams.Bulletspeed;
-            Damage = GunParams.Damage;
-            ReloadTime = GunParams.ReloadTime;
+            _gunStats = (GunStats)weaponStats;
             StartCoroutine(Shooting());
         }
         
@@ -41,8 +38,8 @@ namespace CrazyShooter.Weapons
                     var currentBullet =
                         _diContainer.InstantiatePrefabForComponent<Bullet>(bullet, newPos, bulletStartPos.rotation,
                             transform);
-                    currentBullet.Init(BulletSpeed, Damage, _shootingVector);
-                    yield return new WaitForSeconds(ReloadTime);
+                    currentBullet.Init(_gunStats.Bulletspeed, _gunStats.Damage, _shootingVector);
+                    yield return new WaitForSeconds(_gunStats.ReloadTime);
                 }
 
                 yield return null;

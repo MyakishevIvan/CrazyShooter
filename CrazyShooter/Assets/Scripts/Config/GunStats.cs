@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Enum;
 using UnityEngine;
 
 namespace CrazyShooter.Configs
 {
-    [CreateAssetMenu(fileName = "GunParams", menuName = "Configs/GunParams")]
-    public class GunParams : ScriptableObject
+    [CreateAssetMenu(fileName = "GunStats", menuName = "Configs/GunStats")]
+    public class GunStats : WeaponStats
     {
-        [SerializeField] private float damage;
         [SerializeField] private float bulletspeed;
         [SerializeField] private float reloadTime;
 
-        public float Damage => damage;
         public float Bulletspeed => bulletspeed;
         public float ReloadTime => reloadTime;
     }

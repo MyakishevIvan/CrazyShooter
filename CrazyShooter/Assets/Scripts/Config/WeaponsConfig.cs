@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +11,30 @@ namespace CrazyShooter.Configs
     [CreateAssetMenu(fileName ="WeaponsConfig", menuName = "Configs/WeaponsConfig")]
     public class WeaponsConfig : ScriptableObject
     {
-        [SerializeField] private List<Weapon> weapons;
-        [SerializeField] private GunParams gunParams;
-        [SerializeField] private SwordParams swordParams;
+        [SerializeField] private List<WeaponData> weaponsDataList;
 
-        public GunParams GunParams => gunParams;
-        public SwordParams SwordParams => swordParams;
+        private Dictionary<WeaponType, WeaponData> _weaponsDataDict;
+
+        public Dictionary<WeaponType, WeaponData> WeaponsDataDict => _weaponsDataDict ?? CreatWeaponsDataDictionary();
         
-//TODO: Возможно переписать
-        public Weapon GetWeapon(WeaponType weaponType)
+        private Dictionary<WeaponType, WeaponData> CreatWeaponsDataDictionary()
         {
-            Weapon result = null;
-            var weapon = weapons.First(x => x.WeaponType == weaponType);
-            switch (weaponType)
-            {
-                case WeaponType.Sword:
-                    result = weapon as Sword;
-                    break;
-                case WeaponType.Gun:
-                    result = weapon as Gun;
-                    break;
-                case WeaponType.SmallGun:
-                    result = weapon as Gun;
-                    break;
-                default:
-                    Debug.LogError("There is no case for Wapontype " + weaponType);
-                    break;
-            }
+            _weaponsDataDict = new Dictionary<WeaponType, WeaponData>();
+            foreach (var weapon in weaponsDataList)
+                _weaponsDataDict.Add(weapon.WeaponType, weapon);
 
-            return result;
+            return _weaponsDataDict;
         }
+    }
+
+    [Serializable]
+    public class WeaponData
+    {
+        [SerializeField] private Weapon weapon;
+        [SerializeField] private WeaponStats weaponStats;
+
+        public Weapon Weapon => weapon;
+        public WeaponStats WeaponStats => weaponStats;
+        public WeaponType WeaponType => weapon.WeaponType;
     }
 }

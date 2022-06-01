@@ -99,7 +99,7 @@ namespace CrazyShooter.FightScene
             Enemy instantiatedEnemy;
             foreach (var enemy in enemies)
             {
-                var gun = WeaponsConfig.GetWeapon(enemy.weaponType);
+                var weaponData = WeaponsConfig.WeaponsDataDict[enemy.weaponType];
                 var currentEnemy = EnemiesConfig.EnemiesData[enemy.enemyType];
 
                 switch (enemy.enemyType)
@@ -118,7 +118,7 @@ namespace CrazyShooter.FightScene
                 }
 
                 ChangeEnemyPosition(room, instantiatedEnemy);
-                instantiatedEnemy.InitEnemy(gun, _enemyStats);
+                instantiatedEnemy.InitEnemy(weaponData, _enemyStats);
                 enemiesList.Add(instantiatedEnemy);
             }
 
@@ -159,17 +159,8 @@ namespace CrazyShooter.FightScene
         private void InitPlayer()
         {
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
-
-            var playerController =
-                _diContainer.InstantiatePrefabForComponent<PlayerController>(PlayerConfig.PlayerController,
-                    _playerView.transform);
-            _diContainer.InstantiatePrefabForComponent<InteractionsController>(PlayerConfig.InteractionsController,
-                _playerView.transform);
-
-            _playerView._playerController = playerController;
-            var weapon = _balanceStorage.WeaponsConfig.GetWeapon(WeaponType.Sword);
-            _playerView.SetWeapon(ref weapon);
-            playerController.SetWeapon(weapon);
+            var weaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Sword];
+            _playerView.Init(weaponData, PlayerConfig);
         }
     }
 }

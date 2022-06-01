@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125ad66196cf66248beffe3a0c967c35, type: 3}
   m_Name: WeaponsConfig
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 4840833878484093943, guid: 5e505782137cd2040bd9d8bcaf838237, type: 3}
-  - {fileID: 6359888681355758505, guid: 0e35a15b2a9054d4cbec53a0f431661d, type: 3}
-  - {fileID: 3060505351820040990, guid: acb20ea0de8a64845937888cce526a3f, type: 3}
-  gunParams: {fileID: 11400000, guid: 93cd2aaf1b9788940a3d2532b7968e78, type: 2}
-  swordParams: {fileID: 11400000, guid: 1c062a9d342cbd44ca4787d789eb4ea5, type: 2}
+  weaponsDataList:
+  - weapon: {fileID: 4840833878484093943, guid: 5e505782137cd2040bd9d8bcaf838237, type: 3}
+    weaponStats: {fileID: 11400000, guid: 43fcf7a823400ba498c423d068e0455f, type: 2}
+  - weapon: {fileID: 3060505351820040990, guid: acb20ea0de8a64845937888cce526a3f, type: 3}
+    weaponStats: {fileID: 11400000, guid: 2e242ea982162ba4dbba3143735dda14, type: 2}
+  - weapon: {fileID: 6359888681355758505, guid: 0e35a15b2a9054d4cbec53a0f431661d, type: 3}
+    weaponStats: {fileID: 11400000, guid: 271ac5bf6d629124a90e20b1f85a407b, type: 2}

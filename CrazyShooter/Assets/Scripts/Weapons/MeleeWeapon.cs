@@ -11,25 +11,21 @@ namespace CrazyShooter.Weapons
         [SerializeField] private Transform attackPos;
         [SerializeField] private float attackRange;
         [Inject] private BalanceStorage _balance;
-        private int _angle;
-        private float _speed;
-        private float _damage;
-        private float _delay = 0.5f;
+        private SwordStats _swordStats;
+        private const float _delay = 0.5f;
         private int _startAngle;
         public bool IsAttacking { get; set; }
 
-        private SwordParams SwordParams => _balance.WeaponsConfig.SwordParams;
+        private SwordStats SwordStats => (SwordStats)_balance.WeaponsConfig.WeaponsDataDict[WeaponType].WeaponStats;
         private int angleIndex => transform.lossyScale.x >= 0 ? 1 : -1;
         private void Start()
         {
            transform.rotation = Quaternion.Euler(0f,0f,0f);
         }
 
-        public override void Init()
+        public override void Init(WeaponStats weaponStats)
         {
-            _angle = SwordParams.Angle;
-            _speed = SwordParams.Speed;
-            _damage = SwordParams.Damage;
+            _swordStats = (SwordStats)weaponStats;
         }
         
         private void DamageEnemy()
@@ -62,19 +58,19 @@ namespace CrazyShooter.Weapons
                 if (!swordDown)
                 {
                     transform.rotation =
-                        Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, index * _angle), Time.deltaTime * _speed);
+                        Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, index * _swordStats.Angle), Time.deltaTime * _swordStats.Speed);
 
                     var isEndAngle = false;
                     var endAngle = 0;
                     
                     if (angleIndex > 0)
                     {
-                        endAngle = 360 + _angle;
+                        endAngle = 360 + _swordStats.Angle;
                         isEndAngle = (int)transform.eulerAngles.z <= endAngle;
                     }
                     else
                     {
-                        endAngle = -_angle;
+                        endAngle = -_swordStats.Angle;
                         isEndAngle = transform.eulerAngles.z >= endAngle -1;
                     }
                     
@@ -88,7 +84,7 @@ namespace CrazyShooter.Weapons
                 {
                     transform.rotation =
                         Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, _startAngle),
-                            Time.deltaTime * _speed);
+                            Time.deltaTime * _swordStats.Speed);
 
                     if (transform.eulerAngles.z >= _startAngle)
                     {

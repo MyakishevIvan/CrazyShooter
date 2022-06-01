@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28373376b66290c448b04a302a0593e7, type: 3}
-  m_Name: GunParams
+  m_Script: {fileID: 11500000, guid: 6c4fd278bc1d9274c8ccda9570fed9b3, type: 3}
+  m_Name: SwordStats
   m_EditorClassIdentifier: 
-  damage: 3
-  bulletspeed: 50
-  reloadTime: 0.3
+  weaponType: 0
+  damage: 10
+  speed: 30
+  timeBtwAttack: 0.3
+  angle: -90

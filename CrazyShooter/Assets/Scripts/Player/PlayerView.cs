@@ -2,7 +2,9 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CrazyShooter.Configs;
 using CrazyShooter.Enums;
+using CrazyShooter.Interactions;
 using CrazyShooter.Signals;
 using CrazyShooter.Weapons;
 using Enums;
@@ -19,15 +21,18 @@ namespace CrazyShooter.Core
         [SerializeField] private Transform weaponTarget;
         [Inject] DiContainer _diContainer;
 
-        public PlayerController _playerController { get; set; }
         public Rigidbody2D Rigidbody2D => rigidbody2D;
 
-        public void SetWeapon(ref Weapon weapon)
+        public void Init(WeaponData weaponData, PlayerConfig playerConfig)
         {
-             weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weapon.gameObject, weaponTarget);
-             weapon.Init();
-             weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+           var playerController =  _diContainer.InstantiatePrefabForComponent<PlayerController>(playerConfig.PlayerController, transform);
+            _diContainer.InstantiatePrefabForComponent<InteractionsController>(playerConfig.InteractionsController, transform);
+            var weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
+            weapon.Init(weaponData.WeaponStats);
+            weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+            playerController.SetWeapon(weapon);
         }
+
         public void PlayAnimation(bool isRun)
         {
             animator.SetBool("isRun", isRun);
@@ -35,8 +40,8 @@ namespace CrazyShooter.Core
 
         public void Flip()
         {
-            transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            transform.localScale =
+                new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-
     }
 }

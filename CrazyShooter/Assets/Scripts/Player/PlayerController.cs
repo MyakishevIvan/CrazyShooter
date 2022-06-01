@@ -29,7 +29,7 @@ namespace CrazyShooter.Core
         private void Awake()
         {
             _playerView = GetComponentInParent<PlayerView>();
-            Speed = _playerConfig.PlayerSpeed;
+            Speed = _playerConfig.PlayerStats.PlayerSpeed;
         }
 
         private void Update()
@@ -111,8 +111,7 @@ namespace CrazyShooter.Core
                 _shootingWeapon = shooterWeapon;
             else
                 _meleeWeapon = weapon as MeleeWeapon;
-
-
+            
             shootJoystick.gameObject.SetActive(_shootingWeapon != null);
         }
     }
