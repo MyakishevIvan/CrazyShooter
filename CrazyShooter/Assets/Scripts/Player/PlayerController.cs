@@ -20,16 +20,13 @@ namespace CrazyShooter.Core
         private ShooterWeapon _shootingWeapon;
         private MeleeWeapon _meleeWeapon;
         private bool _isShootingWeapon;
+        private PlayerStats _playerStats;
 
         private float ShootOffset => _shootingWeapon.transform.lossyScale.x >= 0 ? 0 : 180;
-        private PlayerConfig _playerConfig => _balance.PlayerConfig;
-        public float Speed { get; set; }
-        public Joystick ShootJoystick => shootJoystick;
 
         private void Awake()
         {
             _playerView = GetComponentInParent<PlayerView>();
-            Speed = _playerConfig.PlayerStats.PlayerSpeed;
         }
 
         private void Update()
@@ -51,7 +48,7 @@ namespace CrazyShooter.Core
         void FixedUpdate()
         {
             _playerView.Rigidbody2D.MovePosition(_playerView.Rigidbody2D.position +
-                                                 _moveVector * (Speed * Time.fixedDeltaTime));
+                                                 _moveVector * (_playerStats.PlayerSpeed * Time.fixedDeltaTime));
         }
 
         private void PlayerAttackUpdate(bool canAttack)
@@ -105,8 +102,9 @@ namespace CrazyShooter.Core
             }
         }
 
-        public void SetWeapon(Weapon weapon)
+        public void SetWeapon(Weapon weapon, PlayerStats playerStats)
         {
+            _playerStats = playerStats;
             if (weapon is ShooterWeapon shooterWeapon)
                 _shootingWeapon = shooterWeapon;
             else

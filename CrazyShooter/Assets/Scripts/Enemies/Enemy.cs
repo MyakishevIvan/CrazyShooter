@@ -20,7 +20,7 @@ namespace  CrazyShooter.Enemies
         public virtual void InitEnemy(WeaponData weaponData, EnemyStats stats)
         {
             var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
-            currentWeapon.Init(weaponData.WeaponStats);
+            currentWeapon.Init(weaponData.WeaponStats, stats.damage, CharacterType.Enemy);
             currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "EnemyWeapon";
             Weapon = currentWeapon;
             EnemyStats = stats;

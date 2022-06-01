@@ -5,9 +5,7 @@ using CrazyShooter.Enum;
 using CrazyShooter.Configs;
 using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
-using CrazyShooter.Interactions;
 using CrazyShooter.Rooms;
-using Enums;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -19,11 +17,13 @@ namespace CrazyShooter.FightScene
         [Inject] private DiContainer _diContainer;
         [Inject] private BalanceStorage _balanceStorage;
         private CameraController.CameraController _cameraController;
-        private PlayerView _playerView;
         private EnemyStats _enemyStats;
+        private PlayerData _playerData;
+        private WeaponData _playerWeaponData;
+        private PlayerView _playerView;
 
-        private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
         private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
+        private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
         private EnemiesConfig EnemiesConfig => _balanceStorage.EnemiesConfig;
         private Dictionary<RoomType, BaseRoom> RoomsDict => _balanceStorage.RoomsConfig.RoomsDict;
 
@@ -40,6 +40,8 @@ namespace CrazyShooter.FightScene
         private void InitStats()
         {
             _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[DifficultyType.Low];
+            _playerData = _balanceStorage.PlayerConfig.PlayerData[PlayerType.Common];
+            _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Sword];
         }
 
         private void InitSpawnRoom()
@@ -158,9 +160,8 @@ namespace CrazyShooter.FightScene
 
         private void InitPlayer()
         {
-            _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(PlayerConfig.Player);
-            var weaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Sword];
-            _playerView.Init(weaponData, PlayerConfig);
+            _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(_playerData.PlayerView);
+            _playerView.Init(_playerWeaponData, PlayerConfig.PlayerController, PlayerConfig.InteractionsController, _playerData.PlayerStats);
         }
     }
 }

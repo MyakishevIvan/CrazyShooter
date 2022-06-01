@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Configs;
 using CrazyShooter.Enum;
+using CrazyShooter.Enums;
 using Enums;
 using UnityEngine;
 
@@ -13,6 +14,6 @@ namespace CrazyShooter.Weapons
         public WeaponType WeaponType => weaponType;
         protected WeaponStats _weaponStats;
 
-        public abstract void Init(WeaponStats weaponStats);
+        public abstract void Init(WeaponStats weaponStats, int characterDamage, CharacterType weaponOwner);
     }
 }

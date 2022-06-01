@@ -66,6 +66,7 @@ namespace CrazyShooter.Enemies
         {
             animator.SetBool("isRun", false);
             IsAttacking = false;
+            _canHit = false;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

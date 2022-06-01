@@ -1,5 +1,6 @@
 using System.Collections;
 using CrazyShooter.Configs;
+using CrazyShooter.Enums;
 using Enums;
 using UnityEngine;
 using Zenject;
@@ -14,7 +15,8 @@ namespace CrazyShooter.Weapons
         [Inject] private BalanceStorage _balance;
         [Inject] private DiContainer _diContainer;
         private GunStats _gunStats;
-        private Vector3 _shootingVector;
+        private int _totalDamage;
+        private CharacterType _weaponOwner;
         public bool IsShooting { get; set; }
 
         private GunStats GunStats => (GunStats)_balance.WeaponsConfig.WeaponsDataDict[Enum.WeaponType.Gun].WeaponStats;
@@ -22,9 +24,11 @@ namespace CrazyShooter.Weapons
 
 
 
-        public override void Init(WeaponStats weaponStats)
+        public override void Init(WeaponStats weaponStats, int characterDamage, CharacterType weaponOwner)
         {
             _gunStats = (GunStats)weaponStats;
+            _totalDamage = (int)_gunStats.Damage + characterDamage;
+            _weaponOwner = weaponOwner;
             StartCoroutine(Shooting());
         }
         
@@ -38,7 +42,7 @@ namespace CrazyShooter.Weapons
                     var currentBullet =
                         _diContainer.InstantiatePrefabForComponent<Bullet>(bullet, newPos, bulletStartPos.rotation,
                             transform);
-                    currentBullet.Init(_gunStats.Bulletspeed, _gunStats.Damage, _shootingVector);
+                    currentBullet.Init(_gunStats.Bulletspeed, _totalDamage, _weaponOwner);
                     yield return new WaitForSeconds(_gunStats.ReloadTime);
                 }
 

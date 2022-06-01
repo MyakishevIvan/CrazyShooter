@@ -16,21 +16,23 @@ namespace CrazyShooter.Core
 {
     public class PlayerView : MonoBehaviour
     {
+        [SerializeField] private PlayerType playerType;
         [SerializeField] private Animator animator;
         [SerializeField] private Rigidbody2D rigidbody2D;
         [SerializeField] private Transform weaponTarget;
         [Inject] DiContainer _diContainer;
 
         public Rigidbody2D Rigidbody2D => rigidbody2D;
+        public PlayerType PlayerType => playerType;
 
-        public void Init(WeaponData weaponData, PlayerConfig playerConfig)
+        public void Init(WeaponData weaponData, PlayerController controller, InteractionsController interactionsController, PlayerStats playerStats)
         {
-           var playerController =  _diContainer.InstantiatePrefabForComponent<PlayerController>(playerConfig.PlayerController, transform);
-            _diContainer.InstantiatePrefabForComponent<InteractionsController>(playerConfig.InteractionsController, transform);
+           var playerController =  _diContainer.InstantiatePrefabForComponent<PlayerController>(controller, transform);
+            _diContainer.InstantiatePrefabForComponent<InteractionsController>(interactionsController, transform);
             var weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
-            weapon.Init(weaponData.WeaponStats);
+            weapon.Init(weaponData.WeaponStats, playerStats.Damage, CharacterType.PLayer);
             weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-            playerController.SetWeapon(weapon);
+            playerController.SetWeapon(weapon, playerStats);
         }
 
         public void PlayAnimation(bool isRun)

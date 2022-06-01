@@ -11,7 +11,6 @@ namespace CrazyShooter.Interactions
     {
         private void OnTriggerEnter2D(Collider2D collider)
         {
-          
             if (collider.gameObject.layer != LayerMask.NameToLayer("Border"))
                 return;
             

@@ -1,5 +1,6 @@
 using System.Collections;
 using CrazyShooter.Configs;
+using CrazyShooter.Enums;
 using Enums;
 using UnityEngine;
 using Zenject;
@@ -14,24 +15,46 @@ namespace CrazyShooter.Weapons
         private SwordStats _swordStats;
         private const float _delay = 0.5f;
         private int _startAngle;
-        public bool IsAttacking { get; set; }
+        private CharacterType _weaponOwner;
+        public bool IsAttacking { get; private set; }
 
         private SwordStats SwordStats => (SwordStats)_balance.WeaponsConfig.WeaponsDataDict[WeaponType].WeaponStats;
         private int angleIndex => transform.lossyScale.x >= 0 ? 1 : -1;
+        private int _totalDamage;
         private void Start()
         {
            transform.rotation = Quaternion.Euler(0f,0f,0f);
         }
 
-        public override void Init(WeaponStats weaponStats)
+        public override void Init(WeaponStats weaponStats, int characterDamage, CharacterType weaponOwner)
         {
             _swordStats = (SwordStats)weaponStats;
+            _totalDamage = (int)_swordStats.Damage + characterDamage;
+            _weaponOwner = weaponOwner;
         }
         
-        private void DamageEnemy()
+        private void MakeDamage()
         {
-            var enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
-               _balance.PlayerConfig.EnemyLayer);
+            if (_weaponOwner == CharacterType.PLayer)
+            {
+                var enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
+                    _balance.PlayerConfig.EnemyLayer);
+
+                foreach (var enemy in enemies)
+                {
+                    Debug.LogError("Sword Enemy hitted damage : " + _totalDamage);
+                }
+            }
+            
+            if (_weaponOwner == CharacterType.Enemy)
+            {
+                var player = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
+                    _balance.PlayerConfig.PlayerLayer);
+
+               if(player.Length != 0)
+                    Debug.LogError("Sword Player hitted damage : " + _totalDamage);
+                
+            }
            
         }
 
@@ -76,7 +99,7 @@ namespace CrazyShooter.Weapons
                     
                     if (isEndAngle)
                     {
-                        DamageEnemy();
+                        MakeDamage();
                         swordDown = true;
                     }
                 }
@@ -91,7 +114,6 @@ namespace CrazyShooter.Weapons
                         transform.rotation = Quaternion.Euler(0, 0, _startAngle);
                         Invoke("DelayAttack", _delay);
                         StopAllCoroutines();
-                        
                     }
                 }
 
