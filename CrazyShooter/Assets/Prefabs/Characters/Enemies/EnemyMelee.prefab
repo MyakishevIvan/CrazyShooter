@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 141695313188804429}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponTarget
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5376589328247589167}
   - component: {fileID: 4944142916981002779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HandRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3274398261281071835}
   - component: {fileID: 1356253445373522814}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HandLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,8 +384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70223603b1884b14ea68c80c5cf85966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTarget: {fileID: 141695313188804429}
   animator: {fileID: 3627345919456519033}
+  weaponTarget: {fileID: 141695313188804429}
 --- !u!95 &3627345919456519033
 Animator:
   serializedVersion: 3

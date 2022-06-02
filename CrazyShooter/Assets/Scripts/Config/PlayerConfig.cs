@@ -13,24 +13,19 @@ namespace CrazyShooter.Configs
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private InteractionsController interactionsController;
-        [SerializeField] private LayerMask enemyLayer;
-        [SerializeField] private LayerMask playerLayer;
         [SerializeField] private List<PlayerData> playerDataList;
-        
         private Dictionary<PlayerType, PlayerData> _playerDataDict;
         public Dictionary<PlayerType, PlayerData> PlayerData => _playerDataDict ?? CreatPlayerDict();
 
         public PlayerController PlayerController => playerController;
         public InteractionsController InteractionsController => interactionsController;
-        public LayerMask PlayerLayer => playerLayer;
-        public LayerMask EnemyLayer => enemyLayer;
-        
+
         private Dictionary<PlayerType, PlayerData> CreatPlayerDict()
         {
             _playerDataDict = new Dictionary<PlayerType, PlayerData>();
             
             foreach (var playerData in playerDataList)
-                _playerDataDict.Add(playerData.PlayerType, playerData);
+                _playerDataDict.Add(playerData.PlayerType, playerData); 
 
             return _playerDataDict;
         }

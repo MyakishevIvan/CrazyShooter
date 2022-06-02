@@ -13,6 +13,7 @@ namespace  CrazyShooter.Enemies
         [SerializeField] protected Animator animator;
         [SerializeField] private Transform weaponTarget;
         [Inject] DiContainer _diContainer;
+        private int _hp;
         protected Weapon Weapon { get; private set; }
         protected bool IsAttacking { get; set;}
         protected EnemyStats EnemyStats { get; set;}
@@ -24,6 +25,16 @@ namespace  CrazyShooter.Enemies
             currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = "EnemyWeapon";
             Weapon = currentWeapon;
             EnemyStats = stats;
+            _hp = EnemyStats.hp;
+        }
+
+        public virtual void TakeDamage(int damage)
+        {
+            _hp -= damage;
+            Debug.LogError("Enemy Hp " + _hp);
+            
+            if(_hp <= 0)
+                Destroy(gameObject);
         }
 
         public abstract void Attack(PlayerView player);

@@ -1,4 +1,6 @@
 using CrazyShooter.Configs;
+using CrazyShooter.Core;
+using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using UnityEngine;
 using Zenject;
@@ -7,20 +9,16 @@ namespace CrazyShooter.Weapons
 {
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D rigidbody2D;
-        [Inject] private BalanceStorage _balance;
         private float _speed;
-        private float _damage;
+        private int _damage;
         private CharacterType _weaponOwner;
-
-        private PlayerConfig _playerConfig => _balance.PlayerConfig;
-
-        public void Init(float speed, float damage, CharacterType weaponOwner)
+        
+        public void Init(float speed, int damage, CharacterType weaponOwner)
         {
             _speed = speed;
             _damage = damage;
             _weaponOwner = weaponOwner;
-            Invoke("DestoyBullet", 5);
+            Destroy(gameObject, 5);
         }
 
         private void Update()
@@ -33,26 +31,27 @@ namespace CrazyShooter.Weapons
         {
             if (_weaponOwner == CharacterType.Enemy)
             {
-                if (collision.gameObject.layer == _playerConfig.PlayerLayer)
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
                 {
-                    Debug.LogError("Hit Player Damage " + _damage);
+                    var player = collision.gameObject.GetComponent<PlayerView>()._playerController;
+                    player.TakeDamage(_damage);
                     Destroy(gameObject);
                 }
             }
             else if (_weaponOwner == CharacterType.PLayer)
             {
-                if (collision.gameObject.layer == _playerConfig.EnemyLayer)
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    Debug.LogError("Hit Enemy");
+                    var enemy = collision.gameObject.GetComponent<Enemy>();
+                    enemy.TakeDamage(_damage);
                     Destroy(gameObject);
                 }
                 
             }
+            
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Border"))
+                Destroy(gameObject);
         }
 
-        private void DestoyBullet()
-        {
-            Destroy(gameObject);
-        }
     }
 }

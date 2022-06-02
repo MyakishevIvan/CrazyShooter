@@ -1,5 +1,7 @@
 using System.Collections;
 using CrazyShooter.Configs;
+using CrazyShooter.Core;
+using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using Enums;
 using UnityEngine;
@@ -38,21 +40,23 @@ namespace CrazyShooter.Weapons
             if (_weaponOwner == CharacterType.PLayer)
             {
                 var enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
-                    _balance.PlayerConfig.EnemyLayer);
+                    LayerMask.GetMask("Enemy"));
 
                 foreach (var enemy in enemies)
                 {
-                    Debug.LogError("Sword Enemy hitted damage : " + _totalDamage);
+                    enemy.GetComponent<Enemy>().TakeDamage(_totalDamage);
                 }
             }
             
             if (_weaponOwner == CharacterType.Enemy)
             {
                 var player = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
-                    _balance.PlayerConfig.PlayerLayer);
+                    LayerMask.GetMask("Player"));
 
-               if(player.Length != 0)
-                    Debug.LogError("Sword Player hitted damage : " + _totalDamage);
+                if (player.Length != 0)
+                {
+                    player[0].GetComponent<PlayerView>()._playerController.TakeDamage(_totalDamage);
+                }
                 
             }
            

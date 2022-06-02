@@ -21,6 +21,7 @@ namespace CrazyShooter.Core
         private MeleeWeapon _meleeWeapon;
         private bool _isShootingWeapon;
         private PlayerStats _playerStats;
+        private int _hp;
 
         private float ShootOffset => _shootingWeapon.transform.lossyScale.x >= 0 ? 0 : 180;
 
@@ -105,12 +106,21 @@ namespace CrazyShooter.Core
         public void SetWeapon(Weapon weapon, PlayerStats playerStats)
         {
             _playerStats = playerStats;
+            _hp = _playerStats.Hp;
             if (weapon is ShooterWeapon shooterWeapon)
                 _shootingWeapon = shooterWeapon;
             else
                 _meleeWeapon = weapon as MeleeWeapon;
             
             shootJoystick.gameObject.SetActive(_shootingWeapon != null);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _hp -= damage;
+            Debug.LogError("Player HP " + _hp);
+            if(_hp <=0)
+                Destroy(_playerView.gameObject);
         }
     }
 }
