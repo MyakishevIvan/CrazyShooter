@@ -82,6 +82,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &528698022400469167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8007792324396645941}
+  m_Layer: 0
+  m_Name: ProgressBarPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8007792324396645941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528698022400469167}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.41, z: -0.68062687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8873265111515528579}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208854338178080665
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +312,7 @@ Transform:
   m_Children:
   - {fileID: 140663189717753968}
   - {fileID: 4464477300622140331}
+  - {fileID: 8007792324396645941}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -297,8 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d31ecc8645b9e14e97d85fa7e00641e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTarget: {fileID: 9033683486733823754}
   animator: {fileID: 3195565867806781565}
+  weaponTarget: {fileID: 9033683486733823754}
+  head: {fileID: 1135596097821249470}
+  progressBarPos: {fileID: 8007792324396645941}
 --- !u!95 &3195565867806781565
 Animator:
   serializedVersion: 3

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CrazyShooter.Core;
 using CrazyShooter.Enums;
 using CrazyShooter.Interactions;
+using CrazyShooter.Progressbar;
 using DG.Tweening.Plugins;
 using UnityEngine;
 
@@ -13,12 +14,14 @@ namespace CrazyShooter.Configs
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private InteractionsController interactionsController;
+        [SerializeField] private HpProgressbarController hpProgressbar;
         [SerializeField] private List<PlayerData> playerDataList;
         private Dictionary<PlayerType, PlayerData> _playerDataDict;
         public Dictionary<PlayerType, PlayerData> PlayerData => _playerDataDict ?? CreatPlayerDict();
 
         public PlayerController PlayerController => playerController;
         public InteractionsController InteractionsController => interactionsController;
+        public HpProgressbarController HpProgressbarController => hpProgressbar;
 
         private Dictionary<PlayerType, PlayerData> CreatPlayerDict()
         {

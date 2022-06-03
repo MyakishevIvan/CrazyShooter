@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SmallGunStats
   m_EditorClassIdentifier: 
   weaponType: 2
-  damage: 40
+  damage: 5
   bulletspeed: 40
   reloadTime: 0.3

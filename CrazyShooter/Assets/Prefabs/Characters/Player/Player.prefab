@@ -67,6 +67,7 @@ Transform:
   - {fileID: 8185386752435211213}
   - {fileID: 7315497609389959444}
   - {fileID: 4094030847558503711}
+  - {fileID: 6295883981706892215}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,11 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfe7132775221d41bbd6334393f8c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressbarPos: {fileID: 6295883981706892215}
+  playerType: 0
   animator: {fileID: 5075244564903947558}
   rigidbody2D: {fileID: 8807352443701269045}
   weaponTarget: {fileID: 4941809896299113262}
-  weapon: {fileID: 0}
-  Head: {fileID: 6541307286598427712}
+  head: {fileID: 456087269870440922}
 --- !u!95 &5075244564903947558
 Animator:
   serializedVersion: 3
@@ -161,6 +163,36 @@ PolygonCollider2D:
       - {x: -0.52972853, y: -2.841001}
       - {x: 1.5181354, y: -2.7957985}
       - {x: 4.457262, y: 6.237692}
+--- !u!1 &4161145023489038385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6295883981706892215}
+  m_Layer: 0
+  m_Name: ProgressBarPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6295883981706892215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4161145023489038385}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 12.5, z: -7.1670723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2858420272800809046}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4213729553382900319
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +262,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ff8d65468bde3564ba720d49b38520b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -312,7 +344,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7659589428111286360, guid: 55f0c731838df664ba8e865e8be05208, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -394,7 +426,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 65ff926d4c3539347b254a71337f5df5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -477,7 +509,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 31b55a2b8ef65bb40b26b8e1e8f2d95d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -560,7 +592,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7680820834086852892, guid: 55f0c731838df664ba8e865e8be05208, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -642,7 +674,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7659589428111286360, guid: 55f0c731838df664ba8e865e8be05208, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -724,7 +756,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1515702235
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7680820834086852892, guid: 55f0c731838df664ba8e865e8be05208, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Configs;
 using CrazyShooter.Enum;
+using CrazyShooter.Progressbar;
 using CrazyShooter.Signals;
 using CrazyShooter.System;
 using CrazyShooter.Weapons;
@@ -23,6 +24,8 @@ namespace CrazyShooter.Core
         [Inject] private SignalBus _signalBus;
         private Action OnDieAction; 
         private PlayerView _playerView;
+        private HpProgressbarController _hpBarController;
+        private Color _hitTintColor = Color.red;
         private Vector2 _moveVector;
         private bool _isRun;
         private bool _isRightPlayerSide = true;
@@ -121,11 +124,13 @@ namespace CrazyShooter.Core
             _playerView.transform.localScale = localScale;
         }
 
-        public void Init(Weapon weapon, PlayerStats playerStats, Action onDieAction)
+        public void Init(HpProgressbarController hpBarController, Weapon weapon, PlayerStats playerStats, Action onDieAction)
         {
             _playerStats = playerStats;
             OnDieAction = onDieAction;
             _hp = _playerStats.Hp;
+            _hpBarController = hpBarController;
+            
             if (weapon is ShooterWeapon shooterWeapon)
                 _shootingWeapon = shooterWeapon;
             else
@@ -137,7 +142,10 @@ namespace CrazyShooter.Core
         public void TakeDamage(int damage)
         {
             _hp -= damage;
-            Debug.LogError("Player HP " + _hp);
+            PlayHitTint();
+            var damagePersent = _hp / (float)_playerStats.Hp;
+            _hpBarController.SetDamage(damagePersent);
+            
             if (_hp <= 0)
             {
                 _playerView.Animator.SetTrigger("death");
@@ -151,5 +159,12 @@ namespace CrazyShooter.Core
         
         private void DieAction()=> OnDieAction?.Invoke();
         
+        private void PlayHitTint()
+        {
+            _playerView.Head.color = _hitTintColor;
+            Invoke(nameof(SetWhiteColor),0.2f);
+        }
+
+        private void SetWhiteColor() =>  _playerView.Head.color = Color.white;
     }
 }

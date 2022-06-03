@@ -33,7 +33,7 @@ namespace CrazyShooter.Weapons
             {
                 if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
                 {
-                    var player = collision.gameObject.GetComponent<PlayerView>()._playerController;
+                    var player = collision.gameObject.GetComponent<PlayerView>().PlayerController;
                     player.TakeDamage(_damage);
                     Destroy(gameObject);
                 }

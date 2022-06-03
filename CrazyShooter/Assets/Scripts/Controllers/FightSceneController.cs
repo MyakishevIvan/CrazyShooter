@@ -6,6 +6,7 @@ using CrazyShooter.Enum;
 using CrazyShooter.Configs;
 using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
+using CrazyShooter.Progressbar;
 using CrazyShooter.Rooms;
 using CrazyShooter.System;
 using CrazyShooter.Windows;
@@ -18,6 +19,7 @@ namespace CrazyShooter.FightScene
 {
     public class FightSceneController : MonoBehaviour
     {
+        [SerializeField] private GameObject progressbarContainer;
         [Inject] private DiContainer _diContainer;
         [Inject] private BalanceStorage _balanceStorage;
         [Inject] private SceneTransitionSystem _sceneTransitionSystem;
@@ -120,28 +122,34 @@ namespace CrazyShooter.FightScene
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<MeleeEnemy>(currentEnemy, room.transform);
                         ChangeEnemyPosition(room, instantiatedEnemy);
-                        instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     case EnemyType.shooter:
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<ShootingEnemy>(currentEnemy, room.transform);
                         ChangeEnemyPosition(room, instantiatedEnemy);
-                        instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     case EnemyType.meleeBoss:
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<MeleeEnemy>(currentEnemy, room.transform);
-                        instantiatedEnemy.InitEnemy(weaponData, _bossStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     case EnemyType.shooterBoss:
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<ShootingEnemy>(currentEnemy, room.transform);
-                        instantiatedEnemy.InitEnemy(weaponData, _bossStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     default:
                         throw new Exception("There is no case for " + enemy.enemyType);
                 }
                 
+                var hpBarController =  _diContainer.InstantiatePrefabForComponent<HpProgressbarController>(PlayerConfig.HpProgressbarController, 
+                    instantiatedEnemy.ProgressbarPos.position, Quaternion.Euler(0,0,90), progressbarContainer.transform);
+                
+                var stats = enemy.enemyType == EnemyType.melee || enemy.enemyType == EnemyType.shooter
+                    ? _enemyStats
+                    : _bossStats;
+                
+                instantiatedEnemy.InitEnemy(weaponData,hpBarController, stats, enemy.enemyType, DecreaseEnemyCount);
+            
+                hpBarController.Init(CharacterType.Enemy, instantiatedEnemy.ProgressbarPos );
                 enemiesList.Add(instantiatedEnemy);
             }
 
@@ -183,7 +191,12 @@ namespace CrazyShooter.FightScene
         private void InitPlayer()
         {
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(_playerData.PlayerView);
-            _playerView.Init(_playerWeaponData, PlayerConfig.PlayerController, PlayerConfig.InteractionsController, _playerData.PlayerStats,(()=> GoToMenuScene()));
+            var hpBarController =  _diContainer.InstantiatePrefabForComponent<HpProgressbarController>(PlayerConfig.HpProgressbarController, 
+                _playerView.ProgressbarPos.position, Quaternion.Euler(0,0,90), progressbarContainer.transform);
+            
+            hpBarController.Init(CharacterType.PLayer,  _playerView.ProgressbarPos );
+            _playerView.Init(hpBarController, _playerWeaponData, PlayerConfig.PlayerController,
+                PlayerConfig.InteractionsController, _playerData.PlayerStats,(()=> GoToMenuScene()));
         }
         
         private void DecreaseEnemyCount()

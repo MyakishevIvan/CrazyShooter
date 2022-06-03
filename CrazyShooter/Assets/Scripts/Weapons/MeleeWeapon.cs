@@ -58,7 +58,7 @@ namespace CrazyShooter.Weapons
 
                 if (player.Length != 0)
                 {
-                    player[0].GetComponent<PlayerView>()._playerController.TakeDamage(_totalDamage);
+                    player[0].GetComponent<PlayerView>().PlayerController.TakeDamage(_totalDamage);
                 }
             }
         }

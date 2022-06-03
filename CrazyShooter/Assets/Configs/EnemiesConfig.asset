@@ -23,7 +23,7 @@ MonoBehaviour:
   - difficultyType: 0
     runSpeed: 5
     hp: 100
-    damage: 10
+    damage: 5
   - difficultyType: 1
     runSpeed: 10
     hp: 200
