@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Configs;
@@ -20,6 +21,7 @@ namespace CrazyShooter.Core
         [Inject] private SceneTransitionSystem _sceneTransitionSystem;
         [Inject] private WindowsManager _windowsManager;
         [Inject] private SignalBus _signalBus;
+        private Action OnDieAction; 
         private PlayerView _playerView;
         private Vector2 _moveVector;
         private bool _isRun;
@@ -119,9 +121,10 @@ namespace CrazyShooter.Core
             _playerView.transform.localScale = localScale;
         }
 
-        public void SetWeapon(Weapon weapon, PlayerStats playerStats)
+        public void Init(Weapon weapon, PlayerStats playerStats, Action onDieAction)
         {
             _playerStats = playerStats;
+            OnDieAction = onDieAction;
             _hp = _playerStats.Hp;
             if (weapon is ShooterWeapon shooterWeapon)
                 _shootingWeapon = shooterWeapon;
@@ -141,19 +144,12 @@ namespace CrazyShooter.Core
                 _signalBus.Fire(new PlayerDiedSignal());
                 moveJoystick.gameObject.SetActive(false);
                 shootJoystick.gameObject.SetActive(false);
-                Invoke("GoToMenuScene", 2);
+                Invoke("DieAction", 2);
                 this.enabled = false;
             }
         }
-
-        private void GoToMenuScene()
-        {
-            var setup = new FightResultWindowSetup()
-            {
-                title = "You Die",
-                onButtonClick = () => _sceneTransitionSystem.GoToScene(SceneType.Menu, true, false)
-            };
-            _windowsManager.Open<FightResultWindow, FightResultWindowSetup>(setup);
-        }
+        
+        private void DieAction()=> OnDieAction?.Invoke();
+        
     }
 }

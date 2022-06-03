@@ -27,14 +27,15 @@ namespace CrazyShooter.Core
         public PlayerType PlayerType => playerType;
         public Animator Animator => animator;
 
-        public void Init(WeaponData weaponData, PlayerController controller, InteractionsController interactionsController, PlayerStats playerStats)
+        public void Init(WeaponData weaponData, PlayerController controller,
+            InteractionsController interactionsController, PlayerStats playerStats, Action onDieAction)
         {
             _playerController =  _diContainer.InstantiatePrefabForComponent<PlayerController>(controller, transform);
             _diContainer.InstantiatePrefabForComponent<InteractionsController>(interactionsController, transform);
             var weapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
             weapon.Init(weaponData.WeaponStats, playerStats.Damage, CharacterType.PLayer);
             weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-            _playerController.SetWeapon(weapon, playerStats);
+            _playerController.Init(weapon, playerStats, onDieAction);
         }
     }
 }

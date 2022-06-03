@@ -374,6 +374,8 @@ MonoBehaviour:
     color: {r: 0.24705884, g: 0.7058824, b: 0.04705883, a: 1}
   - enemyType: 1
     color: {r: 0.8745099, g: 0.078431375, b: 0.078431375, a: 1}
+  - enemyType: 3
+    color: {r: 0.8745099, g: 0.078431375, b: 0.078431375, a: 1}
   dieEffect: {fileID: 2986319998045382254, guid: 145d7d09c13990d49a1065577304b234, type: 3}
 --- !u!4 &631706377
 Transform:

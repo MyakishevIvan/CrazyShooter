@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Core;
 using CrazyShooter.Enum;
@@ -6,6 +7,9 @@ using CrazyShooter.Configs;
 using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using CrazyShooter.Rooms;
+using CrazyShooter.System;
+using CrazyShooter.Windows;
+using SMC.Windows;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -16,11 +20,15 @@ namespace CrazyShooter.FightScene
     {
         [Inject] private DiContainer _diContainer;
         [Inject] private BalanceStorage _balanceStorage;
+        [Inject] private SceneTransitionSystem _sceneTransitionSystem;
+        [Inject] private WindowsManager _windowsManager;
         private CameraController.CameraController _cameraController;
         private EnemyStats _enemyStats;
+        private EnemyStats _bossStats;
         private PlayerData _playerData;
         private WeaponData _playerWeaponData;
         private PlayerView _playerView;
+        private int _enemyCount;
 
         private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
         private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
@@ -40,6 +48,7 @@ namespace CrazyShooter.FightScene
         private void InitStats()
         {
             _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[DifficultyType.Low];
+            _bossStats = _balanceStorage.EnemiesConfig.EnemyBossStats[DifficultyType.Low];
             _playerData = _balanceStorage.PlayerConfig.PlayerData[PlayerType.Common];
             _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Gun];
         }
@@ -99,6 +108,7 @@ namespace CrazyShooter.FightScene
         {
             var enemiesList = new List<Enemy>();
             Enemy instantiatedEnemy;
+            
             foreach (var enemy in enemies)
             {
                 var weaponData = WeaponsConfig.WeaponsDataDict[enemy.weaponType];
@@ -109,18 +119,29 @@ namespace CrazyShooter.FightScene
                     case EnemyType.melee:
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<MeleeEnemy>(currentEnemy, room.transform);
+                        ChangeEnemyPosition(room, instantiatedEnemy);
+                        instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     case EnemyType.shooter:
                         instantiatedEnemy =
                             _diContainer.InstantiatePrefabForComponent<ShootingEnemy>(currentEnemy, room.transform);
+                        ChangeEnemyPosition(room, instantiatedEnemy);
+                        instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType, DecreaseEnemyCount);
+                        break;
+                    case EnemyType.meleeBoss:
+                        instantiatedEnemy =
+                            _diContainer.InstantiatePrefabForComponent<MeleeEnemy>(currentEnemy, room.transform);
+                        instantiatedEnemy.InitEnemy(weaponData, _bossStats, enemy.enemyType, DecreaseEnemyCount);
+                        break;
+                    case EnemyType.shooterBoss:
+                        instantiatedEnemy =
+                            _diContainer.InstantiatePrefabForComponent<ShootingEnemy>(currentEnemy, room.transform);
+                        instantiatedEnemy.InitEnemy(weaponData, _bossStats, enemy.enemyType, DecreaseEnemyCount);
                         break;
                     default:
                         throw new Exception("There is no case for " + enemy.enemyType);
-                        break;
                 }
-
-                ChangeEnemyPosition(room, instantiatedEnemy);
-                instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType);
+                
                 enemiesList.Add(instantiatedEnemy);
             }
 
@@ -154,6 +175,7 @@ namespace CrazyShooter.FightScene
                 {
                     var enemyInRoom = InitEnemies(instantiatedRoom, room.EnemyInRooms);
                     instantiatedRoom.EnemiesInRoom = enemyInRoom;
+                    _enemyCount += enemyInRoom.Count;
                 }
             }
         }
@@ -161,7 +183,24 @@ namespace CrazyShooter.FightScene
         private void InitPlayer()
         {
             _playerView = _diContainer.InstantiatePrefabForComponent<PlayerView>(_playerData.PlayerView);
-            _playerView.Init(_playerWeaponData, PlayerConfig.PlayerController, PlayerConfig.InteractionsController, _playerData.PlayerStats);
+            _playerView.Init(_playerWeaponData, PlayerConfig.PlayerController, PlayerConfig.InteractionsController, _playerData.PlayerStats,(()=> GoToMenuScene()));
+        }
+        
+        private void DecreaseEnemyCount()
+        {
+            _enemyCount--;
+            if(_enemyCount == 0)
+                Invoke(nameof(GoToMenuScene), 2f);
+        }
+        
+        private void GoToMenuScene()
+        {
+            var setup = new FightResultWindowSetup()
+            {
+                title = _enemyCount == 0? "You Win": "You Die",
+                onButtonClick = () => _sceneTransitionSystem.GoToScene(SceneType.Menu, true, false)
+            };
+            _windowsManager.Open<FightResultWindow, FightResultWindowSetup>(setup);
         }
     }
 }

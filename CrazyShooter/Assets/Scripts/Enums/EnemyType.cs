@@ -4,6 +4,7 @@ namespace CrazyShooter.Enums
     {
         melee = 0,
         shooter = 1,
-        boss = 2
+        meleeBoss = 2,
+        shooterBoss = 3
     }
 }

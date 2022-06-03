@@ -8,7 +8,7 @@ using Enums;
 using UnityEngine;
 using Zenject;
 
-namespace  CrazyShooter.Enemies
+namespace CrazyShooter.Enemies
 {
     public abstract class Enemy : MonoBehaviour
     {
@@ -18,11 +18,14 @@ namespace  CrazyShooter.Enemies
         [Inject] private SignalBus _signalBus;
         private EnemyType _enemyType;
         private int _hp;
+        private Action OnDieAction;
         protected Weapon Weapon { get; private set; }
-        protected bool IsAttacking { get; set;}
-        protected EnemyStats EnemyStats { get; set;}
-        
-        public virtual void InitEnemy(WeaponData weaponData, EnemyStats stats , EnemyType enemyType)
+        protected bool IsAttacking { get; set; }
+        protected EnemyStats EnemyStats { get; set; }
+        public bool IsBoss { get; private set; }
+
+        public virtual void InitEnemy(WeaponData weaponData, EnemyStats stats, EnemyType enemyType,
+            Action onDieAction)
         {
             var currentWeapon = _diContainer.InstantiatePrefabForComponent<Weapon>(weaponData.Weapon, weaponTarget);
             currentWeapon.Init(weaponData.WeaponStats, stats.damage, CharacterType.Enemy);
@@ -31,6 +34,7 @@ namespace  CrazyShooter.Enemies
             EnemyStats = stats;
             _hp = EnemyStats.hp;
             _enemyType = enemyType;
+            OnDieAction = onDieAction;
             _signalBus.Subscribe<PlayerDiedSignal>(DisableObject);
         }
 
@@ -47,7 +51,7 @@ namespace  CrazyShooter.Enemies
 
         public abstract void Attack(PlayerView player);
         public abstract void StopAttack();
-        
+
         public void DisableObject()
         {
             StopAllCoroutines();
@@ -56,8 +60,8 @@ namespace  CrazyShooter.Enemies
 
         private void OnDestroy()
         {
+            OnDieAction?.Invoke();
             _signalBus.Unsubscribe<PlayerDiedSignal>(DisableObject);
         }
     }
-    
 }

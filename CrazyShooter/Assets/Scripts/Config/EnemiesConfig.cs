@@ -13,10 +13,13 @@ namespace CrazyShooter.Configs
     {
         [SerializeField] private List<EnemyData> enemiesDataList;
         [SerializeField] private List<EnemyStats> enemiesStatsList;
+        [SerializeField] private List<EnemyStats> enemiesBossStatsList;
         private Dictionary<EnemyType, Enemy> _enemyDataDict;
         private Dictionary<DifficultyType, EnemyStats> _enemyStatsDict;
+        private Dictionary<DifficultyType, EnemyStats> _enemyBossStatsDict;
         public Dictionary<EnemyType, Enemy> EnemiesData => _enemyDataDict ?? InitEnemiesDataDictionary();
         public Dictionary<DifficultyType, EnemyStats> EnemyStats => _enemyStatsDict ?? InitEnemiesStatsDictionary();
+        public Dictionary<DifficultyType, EnemyStats> EnemyBossStats => _enemyStatsDict ?? InitEnemiesBossStatsDictionary();
 
         private Dictionary<DifficultyType, EnemyStats> InitEnemiesStatsDictionary()
         {
@@ -25,6 +28,15 @@ namespace CrazyShooter.Configs
                 _enemyStatsDict.Add(enemyStats.difficultyType, enemyStats);
 
             return _enemyStatsDict;
+        }
+        
+        private Dictionary<DifficultyType, EnemyStats> InitEnemiesBossStatsDictionary()
+        {
+            _enemyBossStatsDict = new Dictionary<DifficultyType, EnemyStats>();
+            foreach (var enemyStats in enemiesBossStatsList)
+                _enemyBossStatsDict.Add(enemyStats.difficultyType, enemyStats);
+
+            return _enemyBossStatsDict;
         }
 
         //TODO: Возможно переписать

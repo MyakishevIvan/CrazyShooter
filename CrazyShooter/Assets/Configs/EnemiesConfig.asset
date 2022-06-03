@@ -17,6 +17,8 @@ MonoBehaviour:
     enemyType: 0
   - enemy: {fileID: 1385322503497393648, guid: 7f2b439e53b6ef7409a223dc426f3464, type: 3}
     enemyType: 1
+  - enemy: {fileID: 356210945065621627, guid: 61a3f107195b03147bb9fcad759b051e, type: 3}
+    enemyType: 3
   enemiesStatsList:
   - difficultyType: 0
     runSpeed: 5
@@ -30,3 +32,16 @@ MonoBehaviour:
     runSpeed: 15
     hp: 400
     damage: 60
+  enemiesBossStatsList:
+  - difficultyType: 0
+    runSpeed: 20
+    hp: 300
+    damage: 50
+  - difficultyType: 1
+    runSpeed: 30
+    hp: 600
+    damage: 80
+  - difficultyType: 2
+    runSpeed: 40
+    hp: 1000
+    damage: 100
