@@ -18,5 +18,5 @@ MonoBehaviour:
   - playerView: {fileID: 4065806040829728622, guid: faf9e61749dea6e448287310159eae69, type: 3}
     playerStats:
       playerSpeed: 5
-      hp: 10000
-      damage: 20
+      hp: 100
+      damage: 10

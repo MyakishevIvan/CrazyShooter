@@ -153,12 +153,12 @@ SpriteRenderer:
   m_SortingLayerID: -176877405
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: a258423c10ab41e4187d820dca1e392e, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 813892b851ff93c408efbd4fbdbb0305, type: 3}
   m_Color: {r: 0.61819154, g: 0.8679245, b: 0.62288487, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 30, y: 30}
+  m_Size: {x: 20, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -181,14 +181,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 6.4}
-    newSize: {x: 30, y: 30}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 20, y: 20}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 30}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!1001 &369184801023943776
 PrefabInstance:
@@ -207,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.6
+      value: -9.52
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.y
@@ -284,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.14
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.z
@@ -361,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.23
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.z
@@ -434,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.7
+      value: 9.49
       objectReference: {fileID: 0}
     - target: {fileID: 6385867296370483191, guid: 283a95eb515bb7244822261610278d59, type: 3}
       propertyPath: m_LocalPosition.y

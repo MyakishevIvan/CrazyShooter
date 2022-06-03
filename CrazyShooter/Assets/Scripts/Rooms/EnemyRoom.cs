@@ -22,7 +22,10 @@ namespace CrazyShooter.Rooms
             {
                 var player = col.gameObject.GetComponent<PlayerView>();
                 foreach (var enemy in EnemiesInRoom)
+                {
+                    if(enemy != null)
                     enemy.Attack(player);
+                }
 
             }
         }
@@ -32,7 +35,10 @@ namespace CrazyShooter.Rooms
             if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 foreach (var enemy in EnemiesInRoom)
-                    enemy.StopAttack();
+                {
+                    if(enemy != null)
+                        enemy.StopAttack();
+                }
             }
         }
     }

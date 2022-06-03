@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyShooter.Configs;
 using CrazyShooter.Enum;
+using CrazyShooter.Signals;
+using CrazyShooter.System;
 using CrazyShooter.Weapons;
+using CrazyShooter.Windows;
+using SMC.Windows;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +17,9 @@ namespace CrazyShooter.Core
         [SerializeField] private Joystick moveJoystick;
         [SerializeField] private Joystick shootJoystick;
         [Inject] private BalanceStorage _balance;
+        [Inject] private SceneTransitionSystem _sceneTransitionSystem;
+        [Inject] private WindowsManager _windowsManager;
+        [Inject] private SignalBus _signalBus;
         private PlayerView _playerView;
         private Vector2 _moveVector;
         private bool _isRun;
@@ -59,7 +66,8 @@ namespace CrazyShooter.Core
                 var _shootingVector = new Vector3(shootJoystick.Horizontal, shootJoystick.Vertical);
 
                 if (_shootingVector == Vector3.zero)
-                    _shootingVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _shootingWeapon.transform.position;
+                    _shootingVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) -
+                                      _shootingWeapon.transform.position;
 
                 var angel = Mathf.Atan2(_shootingVector.y, _shootingVector.x) * Mathf.Rad2Deg;
                 _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
@@ -83,24 +91,32 @@ namespace CrazyShooter.Core
             if (_moveVector == Vector2.zero && _isRun)
             {
                 _isRun = false;
-                _playerView.PlayAnimation(_isRun);
+                _playerView.Animator.SetBool("isRun", _isRun);
             }
             else if (_moveVector != Vector2.zero && !_isRun)
             {
                 _isRun = true;
-                _playerView.PlayAnimation(_isRun);
+                _playerView.Animator.SetBool("isRun", _isRun);
             }
 
             if (_isRightPlayerSide && _moveVector.x < 0)
             {
                 _isRightPlayerSide = false;
-                _playerView.Flip();
+                Flip();
             }
             else if (!_isRightPlayerSide && _moveVector.x > 0)
             {
                 _isRightPlayerSide = true;
-                _playerView.Flip();
+                Flip();
             }
+        }
+
+        private void Flip()
+        {
+            var localScale = _playerView.transform.localScale;
+            localScale =
+                new Vector3(-1 * localScale.x, localScale.y, localScale.z);
+            _playerView.transform.localScale = localScale;
         }
 
         public void SetWeapon(Weapon weapon, PlayerStats playerStats)
@@ -111,7 +127,7 @@ namespace CrazyShooter.Core
                 _shootingWeapon = shooterWeapon;
             else
                 _meleeWeapon = weapon as MeleeWeapon;
-            
+
             shootJoystick.gameObject.SetActive(_shootingWeapon != null);
         }
 
@@ -119,8 +135,25 @@ namespace CrazyShooter.Core
         {
             _hp -= damage;
             Debug.LogError("Player HP " + _hp);
-            if(_hp <=0)
-                Destroy(_playerView.gameObject);
+            if (_hp <= 0)
+            {
+                _playerView.Animator.SetTrigger("death");
+                _signalBus.Fire(new PlayerDiedSignal());
+                moveJoystick.gameObject.SetActive(false);
+                shootJoystick.gameObject.SetActive(false);
+                Invoke("GoToMenuScene", 2);
+                this.enabled = false;
+            }
+        }
+
+        private void GoToMenuScene()
+        {
+            var setup = new FightResultWindowSetup()
+            {
+                title = "You Die",
+                onButtonClick = () => _sceneTransitionSystem.GoToScene(SceneType.Menu, true, false)
+            };
+            _windowsManager.Open<FightResultWindow, FightResultWindowSetup>(setup);
         }
     }
 }

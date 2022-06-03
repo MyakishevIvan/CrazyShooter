@@ -25,6 +25,7 @@ namespace CrazyShooter.Core
 
         public Rigidbody2D Rigidbody2D => rigidbody2D;
         public PlayerType PlayerType => playerType;
+        public Animator Animator => animator;
 
         public void Init(WeaponData weaponData, PlayerController controller, InteractionsController interactionsController, PlayerStats playerStats)
         {
@@ -34,17 +35,6 @@ namespace CrazyShooter.Core
             weapon.Init(weaponData.WeaponStats, playerStats.Damage, CharacterType.PLayer);
             weapon.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
             _playerController.SetWeapon(weapon, playerStats);
-        }
-
-        public void PlayAnimation(bool isRun)
-        {
-            animator.SetBool("isRun", isRun);
-        }
-
-        public void Flip()
-        {
-            transform.localScale =
-                new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 }

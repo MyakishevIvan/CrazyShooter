@@ -1,6 +1,8 @@
 using System.Collections;
 using CrazyShooter.Configs;
+using CrazyShooter.Core;
 using CrazyShooter.Enums;
+using CrazyShooter.Signals;
 using Enums;
 using UnityEngine;
 using Zenject;
@@ -36,7 +38,7 @@ namespace CrazyShooter.Weapons
         {
             while (true)
             {
-                if (IsShooting)
+                if (IsShooting )
                 {
                     var newPos = new Vector3(bulletStartPos.position.x, bulletStartPos.position.y, 0);
                     var currentBullet =
@@ -49,11 +51,6 @@ namespace CrazyShooter.Weapons
                 yield return null;
             }
         }
-
-
-        private void OnDisable()
-        {
-            StopAllCoroutines();
-        }
+        
     }
 }

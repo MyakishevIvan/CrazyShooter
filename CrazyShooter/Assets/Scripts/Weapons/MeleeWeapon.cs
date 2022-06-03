@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using CrazyShooter.Configs;
 using CrazyShooter.Core;
 using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
+using CrazyShooter.Signals;
 using Enums;
 using UnityEngine;
 using Zenject;
@@ -23,9 +25,10 @@ namespace CrazyShooter.Weapons
         private SwordStats SwordStats => (SwordStats)_balance.WeaponsConfig.WeaponsDataDict[WeaponType].WeaponStats;
         private int angleIndex => transform.lossyScale.x >= 0 ? 1 : -1;
         private int _totalDamage;
+
         private void Start()
         {
-           transform.rotation = Quaternion.Euler(0f,0f,0f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         public override void Init(WeaponStats weaponStats, int characterDamage, CharacterType weaponOwner)
@@ -47,7 +50,7 @@ namespace CrazyShooter.Weapons
                     enemy.GetComponent<Enemy>().TakeDamage(_totalDamage);
                 }
             }
-            
+
             if (_weaponOwner == CharacterType.Enemy)
             {
                 var player = Physics2D.OverlapCircleAll(attackPos.position, attackRange,
@@ -57,9 +60,7 @@ namespace CrazyShooter.Weapons
                 {
                     player[0].GetComponent<PlayerView>()._playerController.TakeDamage(_totalDamage);
                 }
-                
             }
-           
         }
 
         private void OnDrawGizmos()
@@ -75,6 +76,7 @@ namespace CrazyShooter.Weapons
             StopAllCoroutines();
             StartCoroutine(Attack());
         }
+
         private IEnumerator Attack()
         {
             var swordDown = false;
@@ -85,11 +87,12 @@ namespace CrazyShooter.Weapons
                 if (!swordDown)
                 {
                     transform.rotation =
-                        Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, index * _swordStats.Angle), Time.deltaTime * _swordStats.Speed);
+                        Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, index * _swordStats.Angle),
+                            Time.deltaTime * _swordStats.Speed);
 
                     var isEndAngle = false;
                     var endAngle = 0;
-                    
+
                     if (angleIndex > 0)
                     {
                         endAngle = 360 + _swordStats.Angle;
@@ -98,9 +101,9 @@ namespace CrazyShooter.Weapons
                     else
                     {
                         endAngle = -_swordStats.Angle;
-                        isEndAngle = transform.eulerAngles.z >= endAngle -1;
+                        isEndAngle = transform.eulerAngles.z >= endAngle - 1;
                     }
-                    
+
                     if (isEndAngle)
                     {
                         MakeDamage();
@@ -126,7 +129,7 @@ namespace CrazyShooter.Weapons
         }
 
         private void DelayAttack() => IsAttacking = false;
-        
+
         private void OnDisable()
         {
             StopAllCoroutines();

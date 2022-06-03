@@ -74,7 +74,7 @@ namespace CrazyShooter.Rooms
         {
             while (direction != Door.transform.position)
             {
-                var newPos = Vector3.Slerp(Door.transform.position, direction, Time.deltaTime * _openingSpeed);
+                var newPos = Vector3.Lerp(Door.transform.position, direction, Time.deltaTime * _openingSpeed);
                 Door.transform.position = newPos;
                 yield return null;
             }

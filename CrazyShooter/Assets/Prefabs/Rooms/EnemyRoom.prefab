@@ -11,6 +11,22 @@ PrefabInstance:
       propertyPath: roomType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1216263768722269004, guid: 15d66bbf27205ae42811ddc797a9b3e0, type: 3}
+      propertyPath: m_Size.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216263768722269004, guid: 15d66bbf27205ae42811ddc797a9b3e0, type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216263768722269004, guid: 15d66bbf27205ae42811ddc797a9b3e0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216263768722269004, guid: 15d66bbf27205ae42811ddc797a9b3e0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4113764070300536563, guid: 15d66bbf27205ae42811ddc797a9b3e0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -134,4 +150,3 @@ MonoBehaviour:
   rightBorder: {fileID: 1356983877945619265}
   topBorder: {fileID: 7766545978618706417}
   bottomBorder: {fileID: 6043699995790467127}
-  index: 0

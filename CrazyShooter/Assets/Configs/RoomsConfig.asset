@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RoomsConfig
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 7308536598290164831, guid: b0085ff71dce7ce4dbc8dbe3107d4afb, type: 3}
+  - {fileID: 7081853521806841093, guid: b0085ff71dce7ce4dbc8dbe3107d4afb, type: 3}
   - {fileID: 3232066100708412532, guid: eea7709f20e889c49bf5d82394592c1a, type: 3}
   roomsData:
     borderStates:

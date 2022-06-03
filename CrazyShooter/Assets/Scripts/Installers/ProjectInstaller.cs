@@ -24,6 +24,8 @@ public class ProjectInstaller : MonoInstaller
     {
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<LoadedSceneInitializedSignal>();
+        Container.DeclareSignal<EnemyDieEffectSignal>();
+        Container.DeclareSignal<PlayerDiedSignal>();
     }
 
     private void BindSystem()

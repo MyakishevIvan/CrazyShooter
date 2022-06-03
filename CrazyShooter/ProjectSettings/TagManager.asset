@@ -52,6 +52,9 @@ TagManager:
   - name: EnemyWeapon
     uniqueID: 2706250071
     locked: 0
+  - name: Effect
+    uniqueID: 553332287
+    locked: 0
   - name: Player
     uniqueID: 1515702235
     locked: 0
@@ -60,6 +63,9 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 1346012631
+    locked: 0
+  - name: PlayerController
+    uniqueID: 4225311037
     locked: 0
   - name: Windows
     uniqueID: 3854274303

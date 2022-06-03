@@ -41,7 +41,7 @@ namespace CrazyShooter.FightScene
         {
             _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[DifficultyType.Low];
             _playerData = _balanceStorage.PlayerConfig.PlayerData[PlayerType.Common];
-            _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Sword];
+            _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Gun];
         }
 
         private void InitSpawnRoom()
@@ -120,7 +120,7 @@ namespace CrazyShooter.FightScene
                 }
 
                 ChangeEnemyPosition(room, instantiatedEnemy);
-                instantiatedEnemy.InitEnemy(weaponData, _enemyStats);
+                instantiatedEnemy.InitEnemy(weaponData, _enemyStats, enemy.enemyType);
                 enemiesList.Add(instantiatedEnemy);
             }
 
