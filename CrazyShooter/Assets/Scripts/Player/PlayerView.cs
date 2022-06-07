@@ -24,8 +24,8 @@ namespace CrazyShooter.Core
         [SerializeField] private Transform weaponTarget;
         [SerializeField] private SpriteRenderer head;
         [Inject] DiContainer _diContainer;
-        public PlayerController PlayerController { get; private set; }
 
+        public PlayerController PlayerController { get; private set; }
         public SpriteRenderer Head => head;
         public Rigidbody2D Rigidbody2D => rigidbody2D;
         public PlayerType PlayerType => playerType;

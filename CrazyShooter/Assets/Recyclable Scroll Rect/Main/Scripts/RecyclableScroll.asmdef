@@ -1,14 +1,7 @@
 {
-    "name": "CrazyShooter",
+    "name": "RecyclableScroll",
     "rootNamespace": "",
-    "references": [
-        "Zenject",
-        "Unity.TextMeshPro",
-        "com.smc.profile",
-        "com.smc.tools",
-        "com.smc.windows",
-        "RecyclableScroll"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
