@@ -10,6 +10,7 @@ using CrazyShooter.Weapons;
 using CrazyShooter.Windows;
 using SMC.Windows;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace CrazyShooter.Core
@@ -18,9 +19,6 @@ namespace CrazyShooter.Core
     {
         [SerializeField] private Joystick moveJoystick;
         [SerializeField] private Joystick shootJoystick;
-        [Inject] private BalanceStorage _balance;
-        [Inject] private SceneTransitionSystem _sceneTransitionSystem;
-        [Inject] private WindowsManager _windowsManager;
         [Inject] private SignalBus _signalBus;
         private Action OnDieAction; 
         private PlayerView _playerView;
@@ -34,12 +32,17 @@ namespace CrazyShooter.Core
         private bool _isShootingWeapon;
         private PlayerStats _playerStats;
         private int _hp;
+        private int _uiLayer = 1 << 5;
 
         private float ShootOffset => _shootingWeapon.transform.lossyScale.x >= 0 ? 0 : 180;
 
         private void Awake()
         {
+#if  UNITY_EDITOR || UNITY_STANDALONE
+            DisableJoystick();
+#endif
             _playerView = GetComponentInParent<PlayerView>();
+            _signalBus.Subscribe<PlayerWinSignal>(DisableJoystick);
         }
 
         private void Update()
@@ -48,8 +51,9 @@ namespace CrazyShooter.Core
 
 #if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButton(0))
+
 #else
-                if(Input.touchCount> 0)
+                if(Input.touchCount > 0)
 #endif
                 PlayerAttackUpdate(true);
             else
@@ -63,9 +67,12 @@ namespace CrazyShooter.Core
             _playerView.Rigidbody2D.MovePosition(_playerView.Rigidbody2D.position +
                                                  _moveVector * (_playerStats.PlayerSpeed * Time.fixedDeltaTime));
         }
-
+        
         private void PlayerAttackUpdate(bool canAttack)
         {
+            if(EventSystem.current.IsPointerOverGameObject())
+                return;
+
             if (_shootingWeapon != null)
             {
                 var _shootingVector = new Vector3(shootJoystick.Horizontal, shootJoystick.Vertical);
@@ -136,7 +143,7 @@ namespace CrazyShooter.Core
             else
                 _meleeWeapon = weapon as MeleeWeapon;
 
-            shootJoystick.gameObject.SetActive(_shootingWeapon != null);
+            shootJoystick.gameObject.SetActive(shootJoystick.gameObject.activeSelf && _shootingWeapon != null);
         }
 
         public void TakeDamage(int damage)
@@ -150,13 +157,18 @@ namespace CrazyShooter.Core
             {
                 _playerView.Animator.SetTrigger("death");
                 _signalBus.Fire(new PlayerDiedSignal());
-                moveJoystick.gameObject.SetActive(false);
-                shootJoystick.gameObject.SetActive(false);
+                DisableJoystick();
                 Invoke("DieAction", 2);
                 this.enabled = false;
             }
         }
-        
+
+        private void DisableJoystick()
+        {
+            moveJoystick.gameObject.SetActive(false);
+            shootJoystick.gameObject.SetActive(false);
+        }
+
         private void DieAction()=> OnDieAction?.Invoke();
         
         private void PlayHitTint()
@@ -166,5 +178,10 @@ namespace CrazyShooter.Core
         }
 
         private void SetWhiteColor() =>  _playerView.Head.color = Color.white;
+
+        private void OnDisable()
+        {
+            _signalBus.Unsubscribe<PlayerWinSignal>(DisableJoystick);
+        }
     }
 }

@@ -70,11 +70,11 @@ namespace CrazyShooter.Rooms
             StopAllCoroutines();
         }
 
-        private IEnumerator StartOpeningDoor(Vector3 direction)
+        private IEnumerator StartOpeningDoor(Vector3 openingDistance)
         {
-            while (direction != Door.transform.position)
+            while (openingDistance != Door.transform.position)
             {
-                var newPos = Vector3.Lerp(Door.transform.position, direction, Time.deltaTime * _openingSpeed);
+                var newPos = Vector3.Lerp(Door.transform.position, openingDistance, Time.deltaTime * _openingSpeed);
                 Door.transform.position = newPos;
                 yield return null;
             }

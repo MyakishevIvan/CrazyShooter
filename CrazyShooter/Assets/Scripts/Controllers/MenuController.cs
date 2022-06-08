@@ -5,6 +5,7 @@ using CrazyShooter.System;
 using SMC.Windows;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using CrazyShooter.Configs;
 using CrazyShooter.Enums;
 using CrazyShooter.UI;
@@ -16,6 +17,10 @@ public class MenuController : MonoBehaviour
     [Inject] private WindowsManager _windowsManager;
     [Inject] private SceneTransitionSystem _sceneTransitionSystem;
     [Inject] private BalanceStorage _balance;
+    [Inject] private PlayerManager _playerManager;
+    [Inject] private GameModel _gameModel;
+    private int _currentMapLevel;
+    private MapsConfig MapsConfig => _balance.MapsConfig;
 
     private void Awake()
     {
@@ -23,64 +28,81 @@ public class MenuController : MonoBehaviour
         {
             onPlay = OpenPlayerLevelWindow
         });
-        ;
     }
 
     private void OpenPlayerLevelWindow()
     {
-        Action onOpenLevel = () => OpenLevel();
-        var levelCellList = new List<LevelCellSetup>();
-
-        for (int i = 0; i < 20; i++)
-        {
-            var levelState = LevelState.Passed;
-            if (i > 7)
-                levelState = LevelState.NotPassed;
-            else if (i == 7)
-                levelState = LevelState.Current;
-            var cell = new LevelCellSetup()
-            {
-                state = levelState,
-                number = i+1,
-                onClick =  onOpenLevel,
-            };
-            levelCellList.Add(cell);
-        }
-
-        var list = new List<WeaponCellSetup>()
-        {
-            new WeaponCellSetup
-            {
-                onclick = null,
-                weaponType = WeaponType.Sword,
-                weaponSprite = _balance.SpriteConfig.GetWeaponSprite(WeaponType.Sword),
-            },
-            new WeaponCellSetup
-            {
-                onclick = null,
-                weaponType = WeaponType.Gun,
-                weaponSprite = _balance.SpriteConfig.GetWeaponSprite(WeaponType.Gun),
-            },
-            new WeaponCellSetup
-            {
-                onclick = null,
-                weaponType = WeaponType.SmallGun,
-                weaponSprite = _balance.SpriteConfig.GetWeaponSprite(WeaponType.SmallGun),
-            }
-        };
-
         var setup = new PlayerLevelWindowSetup()
         {
-            weaponScrollDataSource = new ItemsScrollDataSource<WeaponCellSetup>(list),
-            levelScrollDataSource = new ItemsScrollDataSource<LevelCellSetup>(levelCellList)
+            OnPlayButton = OpenLevel,
+            weaponScrollDataSource = new ItemsScrollDataSource<WeaponCellSetup>(CreateWeaponCell()),
+            levelScrollDataSource = new ItemsScrollDataSource<LevelCellSetup>( CreateLevelCell())
         };
 
         _windowsManager.Open<PlayerLevelWindow, PlayerLevelWindowSetup>(setup);
-        _windowsManager.Close<MenuWindow>();
     }
 
     private void OpenLevel()
     {
-        _sceneTransitionSystem.GoToScene(SceneType.FighScene);
+        _gameModel.InitGameMode(PlayerType.Common, _playerManager.GetCurrentWeapon(),_currentMapLevel);
+        _sceneTransitionSystem.GoToScene(SceneType.FighScene, true, true,
+            false,  false, OpenPromptWindow);
+    }
+
+    private void OpenPromptWindow()
+    {
+        if(_playerManager.GetCurrentMapLevel() == 0)
+            _windowsManager.Open<PromptWindow, PromptWindowSetup>(new PromptWindowSetup()
+            {
+                pomptText = "Kill all enemies in rooms"
+            });    }
+
+    private List<WeaponCellSetup> CreateWeaponCell()
+    {
+        var availableWeapons = _playerManager.GetAvailableWeapons();
+        var result = new List<WeaponCellSetup>();
+        var selectedWeapon = _playerManager.GetCurrentWeapon();
+
+        foreach (var weapon in availableWeapons)
+        {
+            var cellSetup = new WeaponCellSetup()
+            {
+                onWeaponSelect = _playerManager.ChangeCurrentWeapon,
+                isWeaponSelected = weapon == selectedWeapon,
+                weaponType = weapon,
+                weaponSprite = _balance.SpriteConfig.GetWeaponSprite(weapon),
+            };
+
+            result.Add(cellSetup);
+        }
+
+        return result;
+    }
+
+    private List<LevelCellSetup> CreateLevelCell()
+    {
+        _currentMapLevel = _playerManager.GetCurrentMapLevel();
+        
+        var result = new List<LevelCellSetup>();
+        var cellState = LevelState.Current;
+
+        for (int i = 0; i < MapsConfig.MapsCount; i++)
+        {
+            if (i < _currentMapLevel)
+                cellState = LevelState.Passed;
+            else if (i > _currentMapLevel)
+                cellState = LevelState.NotPassed;
+
+            var cell = new LevelCellSetup()
+            {
+                onClick = OpenLevel,
+                number = i + 1,
+                state = cellState
+            };
+            
+            result.Add(cell);
+        }
+
+        return result;
     }
 }

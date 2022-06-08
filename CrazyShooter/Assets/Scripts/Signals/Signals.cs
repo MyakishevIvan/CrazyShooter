@@ -25,4 +25,7 @@ namespace CrazyShooter.Signals
     public class PlayerDiedSignal
     {
     }
+    public class PlayerWinSignal
+    {
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using CrazyShooter.Core;
 using CrazyShooter.Enum;
 using CrazyShooter.Configs;
@@ -8,6 +9,7 @@ using CrazyShooter.Enemies;
 using CrazyShooter.Enums;
 using CrazyShooter.Progressbar;
 using CrazyShooter.Rooms;
+using CrazyShooter.Signals;
 using CrazyShooter.System;
 using CrazyShooter.Windows;
 using SMC.Windows;
@@ -24,22 +26,27 @@ namespace CrazyShooter.FightScene
         [Inject] private BalanceStorage _balanceStorage;
         [Inject] private SceneTransitionSystem _sceneTransitionSystem;
         [Inject] private WindowsManager _windowsManager;
+        [Inject] private GameModel _gameModel;
+        [Inject] private PlayerManager _playerManager;
+        [Inject] private SignalBus _signalBus;
         private CameraController.CameraController _cameraController;
         private EnemyStats _enemyStats;
         private EnemyStats _bossStats;
         private PlayerData _playerData;
         private WeaponData _playerWeaponData;
         private PlayerView _playerView;
+        private RoomsConfig _roomsConfig;
+        private MapData _mapData;
         private int _enemyCount;
 
         private WeaponsConfig WeaponsConfig => _balanceStorage.WeaponsConfig;
         private PlayerConfig PlayerConfig => _balanceStorage.PlayerConfig;
         private EnemiesConfig EnemiesConfig => _balanceStorage.EnemiesConfig;
-        private Dictionary<RoomType, BaseRoom> RoomsDict => _balanceStorage.RoomsConfig.RoomsDict;
+        
 
         private void Awake()
         {
-            InitStats();
+            InitBalance();
             InitSpawnRoom();
             InitPlayer();
             
@@ -47,23 +54,26 @@ namespace CrazyShooter.FightScene
             _cameraController.Player = _playerView;
         }
 
-        private void InitStats()
+        private void InitBalance()
         {
-            _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[DifficultyType.Low];
-            _bossStats = _balanceStorage.EnemiesConfig.EnemyBossStats[DifficultyType.Low];
-            _playerData = _balanceStorage.PlayerConfig.PlayerData[PlayerType.Common];
-            _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[WeaponType.Gun];
+            _mapData = _balanceStorage.MapsConfig.GetRoomsConfig(_gameModel.CurrnentMapLevel);
+            _enemyStats = _balanceStorage.EnemiesConfig.EnemyStats[_mapData.enemyDifficalt];
+            _bossStats = _balanceStorage.EnemiesConfig.EnemyBossStats[_mapData.bossDifficalt];
+            _roomsConfig = _mapData.roomsConfig;
+            _playerData = _balanceStorage.PlayerConfig.PlayerData[_gameModel.PlayerType];
+            _playerWeaponData = _balanceStorage.WeaponsConfig.WeaponsDataDict[_gameModel.WeaponType];
         }
 
         private void InitSpawnRoom()
         {
-            var roomsData = _balanceStorage.RoomsConfig.RoomsData;
+            var roomsData = _roomsConfig.RoomsData;
+            var roomsDict = _roomsConfig.RoomsDict;
             BaseRoom currentRoom = null;
 
             if (roomsData.roomType == RoomType.SpawnRoom)
             {
                 currentRoom =
-                    _diContainer.InstantiatePrefabForComponent<SpawnRoom>(RoomsDict[roomsData.roomType], transform);
+                    _diContainer.InstantiatePrefabForComponent<SpawnRoom>(roomsDict[roomsData.roomType], transform);
 
                 InitBorder(currentRoom, roomsData.BorderStates);
             }
@@ -76,6 +86,9 @@ namespace CrazyShooter.FightScene
                 return;
 
             InitDependentRooms(roomsData.dependentRooms, currentRoom);
+
+            if (_enemyCount == 0)
+                throw new Exception("In rooms no implemented enemies");
         }
 
         private void InitBorder(BaseRoom currentRoom, List<BorderState> borderStates)
@@ -160,8 +173,8 @@ namespace CrazyShooter.FightScene
         {
             var enemyPos = enemy.transform.position;
             var roomSize = room.Plane.GetComponent<SpriteRenderer>().size;
-            var xPos = Random.Range(enemyPos.x - roomSize.x / 2, enemyPos.x + roomSize.x / 2);
-            var yPos = Random.Range(enemyPos.y - roomSize.y / 2, enemyPos.y + roomSize.y / 2);
+            var xPos = Random.Range(enemyPos.x - roomSize.x / 4, enemyPos.x + roomSize.x / 4);
+            var yPos = Random.Range(enemyPos.y - roomSize.y / 4, enemyPos.y + roomSize.y / 4);
             enemy.transform.position = new Vector3(xPos, yPos, 0);
         }
 
@@ -170,7 +183,7 @@ namespace CrazyShooter.FightScene
             foreach (var room in dependentRooms)
             {
                 var instantiatedRoom =
-                    _diContainer.InstantiatePrefabForComponent<EnemyRoom>(RoomsDict[room.roomType], transform);
+                    _diContainer.InstantiatePrefabForComponent<EnemyRoom>(_roomsConfig.RoomsDict[room.roomType], transform);
 
                 var pos = previouseRoom.GetRoomPosition(instantiatedRoom, room.directionType);
                 instantiatedRoom.transform.localPosition = pos;
@@ -196,14 +209,18 @@ namespace CrazyShooter.FightScene
             
             hpBarController.Init(CharacterType.PLayer,  _playerView.ProgressbarPos );
             _playerView.Init(hpBarController, _playerWeaponData, PlayerConfig.PlayerController,
-                PlayerConfig.InteractionsController, _playerData.PlayerStats,(()=> GoToMenuScene()));
+                PlayerConfig.InteractionsController, _playerData.PlayerStats, GoToMenuScene);
         }
         
         private void DecreaseEnemyCount()
         {
             _enemyCount--;
-            if(_enemyCount == 0)
+            if (_enemyCount == 0)
+            {
+                _signalBus.Fire<PlayerWinSignal>();
+                _playerManager.IncreaseMapLevel();
                 Invoke(nameof(GoToMenuScene), 2f);
+            }
         }
         
         private void GoToMenuScene()
@@ -211,7 +228,7 @@ namespace CrazyShooter.FightScene
             var setup = new FightResultWindowSetup()
             {
                 title = _enemyCount == 0? "You Win": "You Die",
-                onButtonClick = () => _sceneTransitionSystem.GoToScene(SceneType.Menu, true, false)
+                onButtonClick = () => _sceneTransitionSystem.GoToScene(SceneType.Menu, true, true)
             };
             _windowsManager.Open<FightResultWindow, FightResultWindowSetup>(setup);
         }

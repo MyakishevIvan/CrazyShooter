@@ -1,3 +1,4 @@
+using Controllers;
 using CrazyShooter.Configs;
 using CrazyShooter.Signals;
 using CrazyShooter.System;
@@ -26,6 +27,7 @@ public class ProjectInstaller : MonoInstaller
         Container.DeclareSignal<LoadedSceneInitializedSignal>();
         Container.DeclareSignal<EnemyDieEffectSignal>();
         Container.DeclareSignal<PlayerDiedSignal>();
+        Container.DeclareSignal<PlayerWinSignal>();
     }
 
     private void BindSystem()
@@ -33,6 +35,7 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<WindowsManager>().FromComponentInNewPrefab(_windowsManager).AsSingle().NonLazy();
         WindowsManager.CustomWindowInstantiator = CustomWindowInstantiation;
         Container.BindInterfacesAndSelfTo<SceneTransitionSystem>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<GameModel>().AsSingle().NonLazy();
 
         Container.Bind<BalanceStorage>().FromInstance(_balanceStorage).AsSingle();
 
@@ -50,10 +53,7 @@ public class ProjectInstaller : MonoInstaller
     {
         var profileController = SMC.Profile.ProfileController.Instance;
         profileController.Init();
-        
-        
-        
-        
+        BindProfileManager<PlayerManager>(profileController);
         InitializeProfileController(profileController);
     }
 

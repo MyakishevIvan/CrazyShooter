@@ -25,7 +25,7 @@ namespace CrazyShooter.UI
             number.text = data.number.ToString();
             button.onClick.RemoveAllListeners();
 
-            if (data.state != LevelState.NotPassed)
+            if (data.state == LevelState.Current)
                 button.onClick.AddListener(() => data.onClick());
         }
 

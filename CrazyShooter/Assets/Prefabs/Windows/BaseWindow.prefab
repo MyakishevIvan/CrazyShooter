@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2270560040302832097}
   - component: {fileID: 852892534241414407}
   - component: {fileID: 1103980131450673325}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: RaycasrBlocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8886905002774121127}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: MainArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087661029137363772}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: SafeArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7408811348450287675}
   - component: {fileID: 5601618983937818648}
   - component: {fileID: 6339188149632190438}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: BaseWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

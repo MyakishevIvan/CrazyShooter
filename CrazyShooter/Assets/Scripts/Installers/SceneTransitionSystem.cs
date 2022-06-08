@@ -56,24 +56,21 @@ namespace CrazyShooter.System
         }
 
         public void GoToScene(SceneType scene, bool closeAllWindow = true, bool withTransitionScene = true,
-            bool closeTransitionScene = true, bool currentUnload = true)
+            bool closeTransitionScene = false, bool currentUnload = true, Action onLoadSceneAction = null)
         {
             _currentLoadAction = () =>
             {
                 var loadMode = currentUnload ? LoadSceneMode.Single : LoadSceneMode.Additive;
-                Coroutines.Instance.StartCoroutine(LoadSceneAsync(scene, loadMode, closeTransitionScene));
+                Coroutines.Instance.StartCoroutine(LoadSceneAsync(scene, loadMode, closeTransitionScene, onLoadSceneAction, closeAllWindow));
             };
-
-            if (closeAllWindow)
-                _windowsManager.CloseAll();
-
+            
             if (withTransitionScene)
                 _windowsManager.Open<SceneTransitionWindow>();
             else
                 InvokeLoadAction();
         }
 
-        private IEnumerator LoadSceneAsync(SceneType scene, LoadSceneMode mode, bool closeTransitionScene)
+        private IEnumerator LoadSceneAsync(SceneType scene, LoadSceneMode mode, bool closeTransitionScene, Action onLoadSceneAction, bool closeAllWindow )
         {
             var load = SceneManager.LoadSceneAsync((int)scene, mode);
             load.allowSceneActivation = false;
@@ -89,6 +86,10 @@ namespace CrazyShooter.System
             
             if(closeTransitionScene)
                 _windowsManager.Close<SceneTransitionWindow>();
+            else if(closeAllWindow)
+                _windowsManager.CloseAll();
+            
+            onLoadSceneAction?.Invoke();
         }
     }
 }

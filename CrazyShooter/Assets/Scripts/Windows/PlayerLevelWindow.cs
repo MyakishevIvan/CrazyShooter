@@ -6,6 +6,8 @@ using CrazyShooter.UI;
 using PolyAndCode.UI;
 using SMC.Windows;
 using UnityEngine;
+using UnityEngine.Events;
+using Zenject;
 
 namespace CrazyShooter.Windows
 {
@@ -13,13 +15,20 @@ namespace CrazyShooter.Windows
     {
         [SerializeField] private RecyclableScrollRect weaponScroll;
         [SerializeField] private RecyclableScrollRect levelScroll;
+        [SerializeField] private CustomButton playButton;
+        [SerializeField] private CustomButton exitButton;
         private PlayerLevelWindowSetup _setup;
+        [Inject] private WindowsManager _windowsManager;
         public override void Setup(PlayerLevelWindowSetup setup)
         {
             _setup = setup;
             weaponScroll.Initialize(setup.weaponScrollDataSource);
             levelScroll.Initialize(setup.levelScrollDataSource);
             setup.weaponScrollDataSource.OnItemSelected += SetAllWeaponCellUnselected;
+            playButton.onClick.RemoveAllListeners();
+            playButton.onClick.AddListener(() => _setup.OnPlayButton?.Invoke());
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(()=> _windowsManager.Close<PlayerLevelWindow>());
         }
 
         private void SetAllWeaponCellUnselected()
@@ -42,5 +51,6 @@ namespace CrazyShooter.Windows
     {
         public ItemsScrollDataSource<WeaponCellSetup> weaponScrollDataSource;
         public ItemsScrollDataSource<LevelCellSetup> levelScrollDataSource;
+        public Action OnPlayButton;
     }
 }

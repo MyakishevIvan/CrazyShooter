@@ -20,12 +20,11 @@ namespace CrazyShooter.Progressbar
         {
             _barSize = filler.size;
             transform.localScale = _transform.lossyScale;
-            
+
             if (_transform.lossyScale.x > .5f)
                 transform.localScale = new Vector3(.5f, .5f, .5f);
             else
                 transform.localScale = _transform.lossyScale;
-         
         }
 
         private void Update()
@@ -39,13 +38,12 @@ namespace CrazyShooter.Progressbar
             var sortingLayerName = "";
             if (characterType == CharacterType.Enemy)
             {
-                
-                sortingLayerName= "EnemyHp";
+                sortingLayerName = "EnemyHp";
                 filler.color = enemyProgressbarColor;
             }
             else
             {
-                sortingLayerName= "PlayerHp";
+                sortingLayerName = "PlayerHp";
 
                 filler.color = playerProgressbarColor;
             }
@@ -61,8 +59,10 @@ namespace CrazyShooter.Progressbar
 
         public void SetDamage(float value)
         {
-            
-           var size = new Vector2(_barSize.x, _barSize.y * value);
+            if (value < 0)
+                value = 0;
+
+            var size = new Vector2(_barSize.x, _barSize.y * value);
             filler.size = size;
             StopAllCoroutines();
             StartCoroutine(PlayDamageViewAnimation(size.y));
@@ -72,16 +72,14 @@ namespace CrazyShooter.Progressbar
         {
             while (true)
             {
-                var viewValue = Mathf.Lerp(damageView.size.y,newSize, Time.deltaTime * speed);
+                var viewValue = Mathf.Lerp(damageView.size.y, newSize, Time.deltaTime * speed);
                 damageView.size = new Vector2(damageView.lightmapIndex, viewValue);
-                
-                if(damageView.size.y == newSize)
+
+                if (damageView.size.y == newSize)
                     StopAllCoroutines();
-                    
+
                 yield return null;
             }
-
         }
     }
 }
-

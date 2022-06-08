@@ -19,11 +19,12 @@ namespace CrazyShooter.UI
 
         public void Setup(WeaponCellSetup item, UnityAction onButtonClick)
         {
-            SetAsSelected(false);
+            SetAsSelected(item.isWeaponSelected);
             weaponName.text = item.weaponType.ToString();
             weaponImage.sprite = item.weaponSprite;
             button.onClick.AddListener(() =>
             {
+                item.onWeaponSelect(item.weaponType);
                 onButtonClick?.Invoke();
                 SetAsSelected(true);
             });
@@ -40,7 +41,8 @@ namespace CrazyShooter.UI
 
     public class WeaponCellSetup
     {
-        public Action onclick;
+        public Action<WeaponType> onWeaponSelect;
+        public bool isWeaponSelected;
         public WeaponType weaponType;
         public Sprite weaponSprite;
     }
