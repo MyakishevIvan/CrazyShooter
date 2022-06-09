@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109240dcb67d4a8b87b915d8486938f9, type: 3}
+  m_Name: RoomsConfig 3
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 7081853521806841093, guid: b0085ff71dce7ce4dbc8dbe3107d4afb, type: 3}
+  - {fileID: 3232066100708412532, guid: eea7709f20e889c49bf5d82394592c1a, type: 3}
+  roomsData:
+    borderStates:
+    - borderSide: 0
+      borderType: 2
+    - borderSide: 1
+      borderType: 2
+    - borderSide: 2
+      borderType: 2
+    - borderSide: 3
+      borderType: 2
+    enemyInRooms: []
+    roomType: 0
+    directionType: 0
+    dependentRooms:
+    - borderStates:
+      - borderSide: 0
+        borderType: 2
+      enemyInRooms:
+      - enemyType: 0
+        weaponType: 0
+      - enemyType: 1
+        weaponType: 2
+      - enemyType: 1
+        weaponType: 2
+      roomType: 1
+      directionType: 0
+      dependentRooms:
+      - borderStates: []
+        enemyInRooms:
+        - enemyType: 3
+          weaponType: 1
+        roomType: 1
+        directionType: 0
+        dependentRooms: []
+    - borderStates:
+      - borderSide: 0
+        borderType: 2
+      enemyInRooms:
+      - enemyType: 0
+        weaponType: 0
+      - enemyType: 1
+        weaponType: 2
+      - enemyType: 1
+        weaponType: 2
+      roomType: 1
+      directionType: 1
+      dependentRooms: []
+    - borderStates:
+      - borderSide: 3
+        borderType: 2
+      enemyInRooms:
+      - enemyType: 0
+        weaponType: 0
+      - enemyType: 1
+        weaponType: 2
+      - enemyType: 1
+        weaponType: 2
+      - enemyType: 1
+        weaponType: 2
+      - enemyType: 1
+        weaponType: 2
+      roomType: 1
+      directionType: 2
+      dependentRooms: []
+    - borderStates:
+      - borderSide: 2
+        borderType: 2
+      - borderSide: 3
+        borderType: 2
+      enemyInRooms:
+      - enemyType: 3
+        weaponType: 1
+      roomType: 1
+      directionType: 3
+      dependentRooms:
+      - borderStates:
+        - borderSide: 2
+          borderType: 2
+        enemyInRooms:
+        - enemyType: 0
+          weaponType: 0
+        - enemyType: 0
+          weaponType: 0
+        - enemyType: 0
+          weaponType: 0
+        - enemyType: 0
+          weaponType: 0
+        roomType: 1
+        directionType: 3
+        dependentRooms: []

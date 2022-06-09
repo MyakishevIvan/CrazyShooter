@@ -20,4 +20,4 @@ MonoBehaviour:
     playerStats:
       playerSpeed: 5
       hp: 10000
-      damage: 10
+      damage: 100

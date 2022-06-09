@@ -38,6 +38,7 @@ namespace CrazyShooter.Core
 #endif
             _playerView = GetComponentInParent<PlayerView>();
             _signalBus.Subscribe<PlayerWinSignal>(DisableJoystick);
+            _signalBus.Subscribe<PlayerWinSignal>(DisableMoves);
         }
 
         private void Update()
@@ -53,72 +54,18 @@ namespace CrazyShooter.Core
             }
 
 #elif UNITY_ANDROID
-if(_shootingWeapon != null){
-_shootVector = new Vector2(shootJoystick.Horizontal, shootJoystick.Vertical).normalized;
-            if( _shootVector != Vector2.zero)
-            PlayerMobileShootUpdate(true);
-            else
-            PlayerMobileShootUpdate(false);
-}
-            else if(_meleeWeapon != null){
+if(_shootingWeapon != null)
+            PlayerMobileShootUpdate();
+            else if(_meleeWeapon != null)
 PlayerMobileSwordAttackUpdate();
-}
+
 #endif
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             _playerView.Rigidbody2D.MovePosition(_playerView.Rigidbody2D.position +
                                                  _moveVector * (_playerStats.PlayerSpeed * Time.fixedDeltaTime));
-        }
-
-        private void PlayerStandaloneUpdate(bool canAttack)
-        {
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-
-            if (_shootingWeapon != null)
-            {
-                _shootVector = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - _shootingWeapon.transform.position).normalized;
-
-                var angel = Mathf.Atan2(_shootVector.y, _shootVector.x) * Mathf.Rad2Deg;
-                _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
-                _shootingWeapon.IsShooting = canAttack;
-                
-            }
-            else if (_meleeWeapon != null && _meleeWeapon.IsAttacking == false && canAttack)
-            {
-                _meleeWeapon.StartAttack();
-            }
-        }
-
-        private void PlayerMobileSwordAttackUpdate()
-        {
-            var isSecondFingerForAttack = _moveVector != Vector2.zero && Input.GetTouch(1).phase == TouchPhase.Began;
-            var isFirstFingerForAttack = _moveVector == Vector2.zero && Input.GetTouch(0).phase == TouchPhase.Began;
-            var canFight = isFirstFingerForAttack || isSecondFingerForAttack;
-
-            if (canFight && _meleeWeapon.IsAttacking == false)
-                _meleeWeapon.StartAttack();
-        }
-
-        private void PlayerMobileShootUpdate(bool canAttack)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                return;
-
-            if (_shootingWeapon != null)
-            {
-                var angel = Mathf.Atan2(_shootVector.y, _shootVector.x) * Mathf.Rad2Deg;
-                _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
-
-
-                _shootingWeapon.IsShooting = canAttack;
-            }
-            else if (_meleeWeapon != null && _meleeWeapon.IsAttacking == false && canAttack)
-            {
-                _meleeWeapon.StartAttack();
-            }
         }
 
         private void PlayerMoveUpdate()
@@ -150,6 +97,46 @@ PlayerMobileSwordAttackUpdate();
                 Flip();
             }
         }
+
+        private void PlayerStandaloneUpdate(bool canAttack)
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (_shootingWeapon != null)
+            {
+                _shootVector =
+                    (Camera.main.ScreenToWorldPoint(Input.mousePosition) - _shootingWeapon.transform.position)
+                    .normalized;
+
+                var angel = Mathf.Atan2(_shootVector.y, _shootVector.x) * Mathf.Rad2Deg;
+                _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
+                _shootingWeapon.IsShooting = canAttack;
+            }
+            else if (_meleeWeapon != null && _meleeWeapon.IsAttacking == false && canAttack)
+            {
+                _meleeWeapon.StartAttack();
+            }
+        }
+
+        private void PlayerMobileShootUpdate()
+        {
+            _shootVector = new Vector2(shootJoystick.Horizontal, shootJoystick.Vertical).normalized;
+            var angel = Mathf.Atan2(_shootVector.y, _shootVector.x) * Mathf.Rad2Deg;
+            _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
+            _shootingWeapon.IsShooting = _shootVector!= Vector2.zero;
+        }
+
+        private void PlayerMobileSwordAttackUpdate()
+        {
+            var isSecondFingerForAttack = _moveVector != Vector2.zero && Input.GetTouch(1).phase == TouchPhase.Began;
+            var isFirstFingerForAttack = _moveVector == Vector2.zero && Input.GetTouch(0).phase == TouchPhase.Began;
+            var canFight = isFirstFingerForAttack || isSecondFingerForAttack;
+
+            if (canFight && _meleeWeapon.IsAttacking == false)
+                _meleeWeapon.StartAttack();
+        }
+
 
         private void Flip()
         {
@@ -212,5 +199,12 @@ PlayerMobileSwordAttackUpdate();
         {
             _signalBus.Unsubscribe<PlayerWinSignal>(DisableJoystick);
         }
+
+        private void DisableMoves()
+        {
+            _moveVector = Vector2.zero;
+            _shootVector = Vector2.zero;
+        } 
+        
     }
 }

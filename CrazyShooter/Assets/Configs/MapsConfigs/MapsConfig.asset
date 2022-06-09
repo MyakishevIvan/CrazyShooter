@@ -17,3 +17,15 @@ MonoBehaviour:
     roomsConfig: {fileID: 11400000, guid: 869461eff07f82a4e861a71708845264, type: 2}
     enemyDifficalt: 0
     bossDifficalt: 0
+  - mapId: 1
+    roomsConfig: {fileID: 11400000, guid: 98213b2b08f775b4e9bba5e6cb36128c, type: 2}
+    enemyDifficalt: 0
+    bossDifficalt: 0
+  - mapId: 2
+    roomsConfig: {fileID: 11400000, guid: 8ec2c7ba42e28d24aa2366a31c2cf892, type: 2}
+    enemyDifficalt: 0
+    bossDifficalt: 0
+  - mapId: 3
+    roomsConfig: {fileID: 11400000, guid: 0d42339840063b54fabd53d65e93ee85, type: 2}
+    enemyDifficalt: 1
+    bossDifficalt: 0

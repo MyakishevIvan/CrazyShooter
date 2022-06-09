@@ -84,14 +84,16 @@ public class MenuController : MonoBehaviour
         _currentMapLevel = _playerManager.GetCurrentMapLevel();
         
         var result = new List<LevelCellSetup>();
-        var cellState = LevelState.Current;
 
         for (int i = 0; i < MapsConfig.MapsCount; i++)
         {
+            var cellState = LevelState.Current;
+            
             if (i < _currentMapLevel)
                 cellState = LevelState.Passed;
             else if (i > _currentMapLevel)
                 cellState = LevelState.NotPassed;
+           
 
             var cell = new LevelCellSetup()
             {
