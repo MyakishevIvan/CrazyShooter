@@ -46,10 +46,10 @@ namespace CrazyShooter.Core
 
 #if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButton(0))
-                PlayerStandaloneAttackUpdate(true);
+                PlayerStandaloneUpdate(true);
             else
             {
-                PlayerStandaloneAttackUpdate(false);
+                PlayerStandaloneUpdate(false);
             }
 
 #elif UNITY_ANDROID
@@ -72,19 +72,19 @@ PlayerMobileSwordAttackUpdate();
                                                  _moveVector * (_playerStats.PlayerSpeed * Time.fixedDeltaTime));
         }
 
-        private void PlayerStandaloneAttackUpdate(bool canAttack)
+        private void PlayerStandaloneUpdate(bool canAttack)
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
             if (_shootingWeapon != null)
             {
-                _shootVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) -
-                               _shootingWeapon.transform.position;
+                _shootVector = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - _shootingWeapon.transform.position).normalized;
 
                 var angel = Mathf.Atan2(_shootVector.y, _shootVector.x) * Mathf.Rad2Deg;
                 _shootingWeapon.transform.rotation = Quaternion.Euler(0f, 0f, angel + ShootOffset);
                 _shootingWeapon.IsShooting = canAttack;
+                
             }
             else if (_meleeWeapon != null && _meleeWeapon.IsAttacking == false && canAttack)
             {

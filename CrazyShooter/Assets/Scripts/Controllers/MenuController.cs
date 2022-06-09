@@ -46,7 +46,7 @@ public class MenuController : MonoBehaviour
     {
         _gameModel.InitGameMode(PlayerType.Common, _playerManager.GetCurrentWeapon(),_currentMapLevel);
         _sceneTransitionSystem.GoToScene(SceneType.FighScene, true, true,
-            false,  false, OpenPromptWindow);
+            false,  true, OpenPromptWindow);
     }
 
     private void OpenPromptWindow()

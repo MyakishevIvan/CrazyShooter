@@ -38,12 +38,12 @@ namespace CrazyShooter.Progressbar
             var sortingLayerName = "";
             if (characterType == CharacterType.Enemy)
             {
-                sortingLayerName = "EnemyHp";
+                sortingLayerName = "Enemy";
                 filler.color = enemyProgressbarColor;
             }
             else
             {
-                sortingLayerName = "PlayerHp";
+                sortingLayerName = "Player";
 
                 filler.color = playerProgressbarColor;
             }
