@@ -1,15 +1,9 @@
-using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CrazyShooter.Configs;
 using CrazyShooter.Enums;
 using CrazyShooter.Interactions;
 using CrazyShooter.Progressbar;
-using CrazyShooter.Signals;
 using CrazyShooter.Weapons;
-using Enums;
-using UnityEditor.Animations;
 using UnityEngine;
 using Zenject;
 

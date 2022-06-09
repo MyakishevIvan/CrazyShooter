@@ -1,12 +1,10 @@
 ﻿using System;
-using Codice.Client.GameUI.Explorer;
 using CrazyShooter.Enums;
 using PolyAndCode.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using NotImplementedException = System.NotImplementedException;
 
 namespace CrazyShooter.UI
 {
@@ -44,7 +42,7 @@ namespace CrazyShooter.UI
                     selectedView.color = Color.white;
                     break;
                 default:
-                    Debug.LogError("Threr is no case for level state " + state);
+                    Debug.LogError("There is no case for level state " + state);
                     break;
             }
         }

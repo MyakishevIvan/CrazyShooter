@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using PlasticGui.WebApi.Responses;
 using SMC.Windows;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using CrazyShooter.Rooms;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace CrazyShooter.Interactions

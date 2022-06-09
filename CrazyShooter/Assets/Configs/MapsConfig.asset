@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c8f86b3612440aa2bcb18f7ba8f2cf, type: 3}
   m_Name: MapsConfig
   m_EditorClassIdentifier: 
-  mapsData: []
+  mapsData:
+  - mapId: 0
+    roomsConfig: {fileID: 11400000, guid: 869461eff07f82a4e861a71708845264, type: 2}
+    enemyDifficalt: 0
+    bossDifficalt: 0

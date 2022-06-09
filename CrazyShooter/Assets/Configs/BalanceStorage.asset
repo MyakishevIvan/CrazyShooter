@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerConfig: {fileID: 11400000, guid: 2d1cff1f3caabad4aa49aab1cdc753ae, type: 2}
   weaponsConfig: {fileID: 11400000, guid: 40b795e193a6ef04695f692d5b81b966, type: 2}
-  roomsConfig: {fileID: 11400000, guid: 869461eff07f82a4e861a71708845264, type: 2}
+  mapsConfig: {fileID: 11400000, guid: b6f2fa64ab073794690a46314938d384, type: 2}
   enemiesConfig: {fileID: 11400000, guid: cc7a581bbef95214582994853c86dba3, type: 2}
   spriteConfig: {fileID: 11400000, guid: 8fc525d591e26194abdcadd06ecbfdb4, type: 2}

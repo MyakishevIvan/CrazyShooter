@@ -13,6 +13,7 @@ public class DynamicJoystickEditor : JoystickEditor
         base.OnEnable();
         moveThreshold = serializedObject.FindProperty("moveThreshold");
     }
+#if  UNITY_EDITOR
 
     public override void OnInspectorGUI()
     {
@@ -26,6 +27,8 @@ public class DynamicJoystickEditor : JoystickEditor
             backgroundRect.pivot = center;
         }
     }
+    
+#endif
 
     protected override void DrawValues()
     {
